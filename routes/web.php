@@ -17,10 +17,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
+/*
+Frameork routes
+*/
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 /*
-
+Wroten routes
 */
 Route::get('/', function () {
     return view('accueil');
 });
+Route::get('/logn', function(){
+    return view('logn');
+});
+Route::get('/registr', function(){
+    return view('registr');
+});
+Route::get('/search', function(){
+    return view('result');
+});
+Route::get('/projects', function(){
+    return view('projects');
+});
+Route::resource('/solutions', 'SolutionsController');

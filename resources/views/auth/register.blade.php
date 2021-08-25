@@ -15,21 +15,23 @@
                                 {{ __('General informations')}}
                             </span>
                         </div>
+                        <!--Category-->
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Choose a category') }}</label>
+                            <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Choose a category') }}</label>
 
                             <div class="col-md-6">
-                                <select name="" type="text" class="form-control @error('') is-invalid @enderror" id="" >
+                                <select name="category" type="text" class="form-control @error('category') is-invalid @enderror" id="category" >
                                     <option value="single">{{ __('Developer') }}</option>
                                     <option value="team">{{ __('Team of developers') }}</option>
                                 </select>
-                                @error('name')
+                                @error('category')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
+                        <!--Nom-->
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
@@ -43,39 +45,42 @@
                                 @enderror
                             </div>
                         </div>
+                        <!--Pays-->
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
+                            <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="country" type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}" required autocomplete="country">
 
-                                @error('name')
+                                @error('country')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
+                        <!--Téléphone-->
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
+                            <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
 
-                                @error('name')
+                                @error('tel')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
+                        <!--Site web-->
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Web site') }}</label>
+                            <label for="website" class="col-md-4 col-form-label text-md-right">{{ __('Web site') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="website" type="text" class="form-control @error('website') is-invalid @enderror" name="website" value="{{ old('website') }}" required autocomplete="website">
 
-                                @error('name')
+                                @error('website')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -87,6 +92,7 @@
                                 {{ __('Authentication informations')}}
                             </span>
                         </div>
+                        <!--email-->
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,7 +112,7 @@ document.querySelector('#sol-create-form').addEventListener('submit', function (
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!************************************!*\
   !*** multi ./resources/js/myjs.js ***!
   \************************************/

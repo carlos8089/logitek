@@ -27,7 +27,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
+var app = new Vue({
     el: '#app',
-});
+    data: {
+        message: 'hello gro.. tu avances bien?'
+    }
+})
+
 

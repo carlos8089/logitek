@@ -12,7 +12,7 @@
                 </form>
             </div>
         </nav>
-        
+
     </div>
 
     <div class="card-body">
@@ -22,10 +22,37 @@
             </div>
         @endif
         <div class="justify-content-end">
-            {{ __('No solution yet')}}
-            <a href="{{ route('solutions.show', ['solution'=>'1']) }} " type="button" class="btn btn-outline-primary">{{ __('Solution page') }}</a>
+            @if ($solutions !== null)
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Name</th>
+                              <th scope="col">Category</th>
+                              <th scope="col">Platform</th>
+                              <th scope="col">Amount</th>
+                              <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($solutions as $solution)
+                            <tr>
+                                <th>{{ $solution->name }}</th>
+                                <th>{{ $solution->category }}</th>
+                                <th>{{ $solution->platform }}</th>
+                                <th>{{ $solution->amount }}</th>
+                                <th><a href="{{ route('solutions.show', ['solution'=> $solution->id]) }} " type="button" class="btn btn-outline-primary">{{ __('Solution page') }}</a></th>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+            @else
+                {{ __('No solution yet')}}
+            @endif
         </div>
-        
+
     </div>
 </div>
 @endsection

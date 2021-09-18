@@ -17,7 +17,7 @@
             </div>
         @endif
         <div class="container-fluid">
-            <form action="" method="" id="sol-create-form">
+            <form action="{{ route('solutions.store') }}" method="POST" id="sol-create-form">
                 @csrf
                 <div class="alert alert-dark">
                     {{ __('General informations')}}
@@ -27,7 +27,7 @@
                         <label for="">{{ __('Name') }}</label>
                     </div>
                     <div class="col-md-7">
-                        <input class="form-control" type="text" name="" id="">
+                        <input class="form-control" type="text" name="name" id="">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -35,14 +35,13 @@
                         <label for="">{{ __('Category') }}</label>
                     </div>
                     <div class="col-md-7">
-                        <select class="form-control" name="" id="">
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
+                        <select class="form-control" name="category" id="">
+                            <option value="dvt">Divertissement</option>
+                            <option value="edu">Education</option>
+                            <option value="fin">Finance</option>
+                            <option value="rh">Ressources Humaines</option>
+                            <option value="sbe">Santé & bien être</option>
+                            <option value="tel">Télécommunication</option>
                         </select>
                     </div>
                 </div>
@@ -51,14 +50,13 @@
                         <label for="">{{ __('Sub-category') }}</label>
                     </div>
                     <div class="col-md-7">
-                        <select class="form-control" name="" id="">
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
+                        <select class="form-control" name="subcategory" id="">
+                            <option value="cpt">Comptabilité</option>
+                            <option value="fit">Fitness</option>
+                            <option value="gpl">Gestion de personnel</option>
+                            <option value="lan">Langue</option>
+                            <option value="str">Streaming</option>
+                            <option value="rnt">Rencontre</option>
                         </select>
                     </div>
                 </div>
@@ -67,14 +65,14 @@
                         <label for="">{{ __('Operating platform') }}</label>
                     </div>
                     <div class="col-md-7">
-                        <select name="" id="" class="form-control">
-                            <option value="">All mobile platform</option>
-                            <option value="">Android</option>
-                            <option value="">iOS</option>
-                            <option value="">Desktop</option>
-                            <option value="">Client web</option>
-                            <option value="">SaaS Software</option>
-                            <option value="">Other(s)</option>
+                        <select name="platform" id="" class="form-control">
+                            <option value="all">All mobile platform</option>
+                            <option value="and">Android</option>
+                            <option value="ios">iOS</option>
+                            <option value="dsk">Desktop</option>
+                            <option value="web">Client web</option>
+                            <option value="sof">SaaS Software</option>
+                            <option value="oth">Other(s)</option>
                         </select>
                     </div>
                 </div>
@@ -83,7 +81,7 @@
                         <label for="">{{ __('Mention a specific OS') }} <span>{{ __('(optional)')}}</span></label>
                     </div>
                     <div class="col-md-7">
-                        <input class="form-control" type="text" name="" id="" placeholder="Use comma to separate element if there are several. (ex: Linux, Windows, Solaris...)">
+                        <input class="form-control" type="text" name="os" id="" placeholder="Use comma to separate element if there are several. (ex: Linux, Windows, Solaris...)">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -91,7 +89,7 @@
                         <label for="">{{ __('Description') }}</label>
                     </div>
                     <div class="col-md-7">
-                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+                        <textarea class="form-control" name="desc" id="" cols="30" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -99,7 +97,7 @@
                         <label for="">{{ __('Site') }}</label>
                     </div>
                     <div class="col-md-7">
-                        <input class="form-control" type="url" name="" id="" placeholder="https://www.mysite.com">
+                        <input class="form-control" type="url" name="site" id="" placeholder="https://www.mysite.com">
                     </div>
                 </div>
                 <div class="alert alert-dark">
@@ -110,9 +108,9 @@
                         {{ __('Type')}}
                     </div>
                     <div class="col-md-7">
-                        <select class="form-control" name="" id="tradeType">
-                            <option value="free">{{ __('Free of charge')}}</option>
-                            <option value="rent">{{ __('Rent product')}}</option>
+                        <select class="form-control" name="sellable" id="tradeType">
+                            <option value="0">{{ __('Free of charge')}}</option>
+                            <option value="1">{{ __('Rent product')}}</option>
                         </select>
                     </div>
                 </div>
@@ -121,7 +119,7 @@
                         <label for="">{{ __('Currency') }}</label>
                     </div>
                     <div class="col-md-7">
-                        <select class="form-control" name="" id="currencies" disabled>
+                        <select class="form-control" name="currency" id="currencies" disabled>
                             <option value="">XOF (FCFA)</option>
                             <option value="">Ghana Cidis</option>
                             <option value="">Naira</option>
@@ -135,13 +133,13 @@
                         <label for="">{{ __('Amount') }}</label>
                     </div>
                     <div class="col-md-7">
-                        <input class="form-control" type="number" name="" id="amount" disabled>
+                        <input class="form-control" type="number" name="amount" id="amount" disabled>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
                     <div class="col-4" style="font-size: 2.5em">
                         <input class="btn btn-success me-2" id="solCreateBtn" type="submit" value="Add Now" style="width: 100%">
-                    </div> 
+                    </div>
                 </div>
             </form>
         </div>

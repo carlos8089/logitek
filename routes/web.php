@@ -27,9 +27,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 /*
 Wroten routes
 */
-Route::get('/', function () {
-    return view('accueil');
-});
+Route::resource('solutions', SolutionController::class);
+Route::get('/','StaticController@accueil');
+Route::get('/{id}', 'StaticController@solution')->name('solution');
 Route::get('/logn', function(){
     return view('logn');
 });
@@ -42,4 +42,3 @@ Route::get('/search', function(){
 Route::get('/projects', function(){
     return view('projects');
 });
-Route::resource('/solutions', 'SolutionsController');

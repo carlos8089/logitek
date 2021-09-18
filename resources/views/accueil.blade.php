@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid" style="background-color: red">
+    <div class="container-fluid border-bottom" style="background-color:#f6f8fa">
         <div style="padding: 3% 20%">
-            <div id="search-zone">
+            <div id="search-zone" class="d-flex justify-content-center">
                 <form class="form-inline" action="{{ url('/search') }}" method="get">
                     <div class="col-9">
                         <input type="search" class="form-control mr-sm-2" placeholder="Rechercher un logiciel ou projet" aria-label="Search" name="" id="" style="width: 100%">
@@ -11,7 +11,7 @@
                         <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                     </div>
                 </form>
-            </div> 
+            </div>
         </div>
     </div>
     <div class="container">
@@ -19,35 +19,30 @@
             <h3>{{ __('Les plus recommandés')}}</h3>
         </div>
         <div class="alert">
-            <div id="grill" class="row">
-
+            <div id="grill" class="container">
+                @foreach ($solutions as $solution)
+                    <div class="card alert col-4 shadow d-inline-block" style="background-color: #f6f8fa">
+                        <div class="row">
+                            <div class="col-9">
+                                <h3>
+                                    <a href="{{ route('solution', $solution->id) }}">{{ $solution->name }}</a>
+                                </h3>
+                            </div>
+                            <div class="col-3">
+                                {{ $solution->amount }}
+                            </div>
+                        </div>
+                        <div>
+                            <span class="badge badge-primary badge-pill">{{ $solution->category }}</span>
+                            <span class="badge badge-primary badge-pill">{{ $solution->subcategory }}</span>
+                            <span class="badge badge-primary badge-pill">{{ $solution->platform }}</span>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="row">
-            <a href="{{ route('solutions.show',['solution'=>'1'])}}">
-                <div class="col-4 card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-9 alert">
-                                <strong><h4>{{ __('TITLE') }}</h4></strong>
-                            </div>
-                            <div class="col-md-3 alert alert-success">
-                                <strong><h4>{{ __('price') }}</h4></strong>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <textarea name="" id="" cols="50" rows="2" disabled=true>
-    
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            
-        </div>
-    </div>
-    
 @endsection
+<!--
 <script src="{{ asset('js/accueil.js') }}" defer></script>
+-->

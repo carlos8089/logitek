@@ -73,8 +73,10 @@
                 </div>
             </div>
         </nav>
-        <main class="py-4 bg-white">
-            @{{message}}
+        <main class="bg-white" style="margin-bottom: 0%">
+            <!-- Message test Vue
+                @{{message}}
+            -->
             @yield('content')
         </main>
     </div>

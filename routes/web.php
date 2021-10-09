@@ -49,4 +49,5 @@ Route::get('/projects', function(){
 Route::get('sol/categories/{name}', [StaticController::class, 'interceptCatName'])->name('fcat');
 Route::get('sol/subcategories/{id}', [StaticController::class, 'fsubcat'])->name('fsubcat');
 Route::get('sol/platforms/{id}', [StaticController::class, 'fpltform'])->name('fplatform');
-//Route::put('/storage', [StaticController::class, 'storeFiles'])->name('uploads');
+Route::post('/store', [StaticController::class, 'storeFiles'])->name('uploads');
+Route::view('/test', 'test');

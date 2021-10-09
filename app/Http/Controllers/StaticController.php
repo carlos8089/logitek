@@ -8,7 +8,7 @@ use App\Solution;
 use App\Subcategorie;
 use App\Platform;
 use App\User;
-
+use Illuminate\Support\Facades\Storage;
 class StaticController extends Controller
 {
     public function accueil(){
@@ -85,5 +85,19 @@ class StaticController extends Controller
         return $this->fplatform($platform);
     }
 
-
+    //Files management
+    public function storeFiles(Request $request){
+        /*
+        Storage::disk('local')->put('public/exampl.txt', 'Contents');
+        echo('A file has been created. click to see ');
+        return redirect(asset('storage/exampl.txt'));
+        */
+        $paths = [];
+        $files = $request->file('screen');
+        foreach($files as $file){
+            $path = $file->storePublicly('images','public');
+            array_push($paths, $path);
+        }
+        return view('imgTest', compact('paths'));
+    }
 }

@@ -28,25 +28,25 @@
                             </span>
                         </div>
                     </nav>
-                    <div>
+                    <div id="badges">
                         <div class="container">
                             <h4>
-                                    <span class="badge badge-primary badge-pill">{{ $solu->category }}</span>
-                                    <span class="badge badge-primary badge-pill">{{ $solu->subcategory }}</span>
-                                    <span class="badge badge-primary badge-pill">{{ $solu->platform }}</span>
-                                    <span class="badge badge-primary badge-pill">{{ $solu->user_id }}</span>
+                                <a href="{{ route('fcat', ['name'=>$solu->category]) }}"><span class="badge badge-primary badge-pill">{{ $solu->category }}</span></a>
+                                <a href=""><span class="badge badge-primary badge-pill">{{ $solu->subcategory }}</span></a>
+                                <a href=""><span class="badge badge-primary badge-pill">{{ $solu->platform }}</span></a>
                             </h4>
                         </div>
                     </div>
-                    <div>
+                    <div id="intouch">
                         <div class="container">
                             <nav class="navbar ">
-                                <span class="navbar-brand">
-                                    {{ __('Par ') }} {{$solu->user_id}}
-                                </span>
+
                                 <div class="d-flex justify-content-end">
-                                    <a class="btn btn-outline-primary" style="margin-left: 0.9%" href="{{ $solu->site }}" target="_blank" rel="noopener noreferrer">{{ __('Website') }}</a>
                                     @foreach ($users as $user)
+                                    <span class="navbar-brand">
+                                        {{ __('Par ') }} {{$user->name}}
+                                    </span>
+                                    <a class="btn btn-outline-primary" style="margin-left: 0.9%" href="{{ $solu->site }}" target="_blank" rel="noopener noreferrer">{{ __('Website') }}</a>
                                         <a class="btn btn-outline-secondary" style="margin-left: 0.9%" href="mailto:{{$user->email}}">{{ __('Message') }}</a>
                                         <a class="btn btn-outline-success" style="margin-left: 0.9%" href="tel:+{{$user->tel}}">{{ __('Call') }}</a>
                                     @endforeach

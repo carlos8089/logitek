@@ -5,7 +5,7 @@
             <div id="search-zone" class="d-flex justify-content-center">
                 <form class="form-inline" action="{{ url('/search') }}" method="get">
                     <div class="col-9">
-                        <input type="search" class="form-control mr-sm-4" placeholder="Rechercher un logiciel ou projet" aria-label="Search" name="stsearch" id="" style="width: 100%">
+                        <input type="search" class="form-control mr-sm-2" placeholder="Rechercher un logiciel ou projet" aria-label="Search" name="stsearch" id="" style="width: 100%">
                     </div>
                     <div class="col-3">
                         <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
@@ -52,33 +52,92 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        <div class="alert">
-            <h3>{{ __('Les plus recommandés')}}</h3>
-        </div>
-    </div>
-    <div class="alert">
-        <div id="grill" class="container-fluid">
-                @foreach ($solutions as $solution)
+    @switch($type)
+        @case('category')
+                <div class="container">
+                    <div class="alert">
+                        <h3>
+                            {{ __('Categories : ') }} {{ $category }}
+                        </h3>
+                    </div>
+                </div>
+                @foreach ($fsols as $fsol)
                     <div class="card alert col-md-3 shadow d-inline-block" style="background-color: #f6f8fa; margin: 3%">
                         <div class="row">
                             <div class="col-8">
                                 <h4>
-                                    <a href="{{ route('staticsolution', $solution->id) }}">{{ $solution->name }}</a>
+                                    <a href="{{ route('staticsolution', $fsol->id) }}">{{ $fsol->name }}</a>
                                 </h4>
                             </div>
                             <div class="col-4">
-                                {{ $solution->amount }}
+                                {{ $fsol->amount }}
                             </div>
                         </div>
-                        <div id="badges">
-                            <span class="badge badge-primary badge-pill">{{ $solution->category }}</span>
-                            <span class="badge badge-primary badge-pill">{{ $solution->subcategory }}</span>
-                            <span class="badge badge-primary badge-pill">{{ $solution->platform }}</span>
+                        <div>
+                            <span class="badge badge-primary badge-pill">{{ $fsol->category }}</span>
+                            <span class="badge badge-primary badge-pill">{{ $fsol->subcategory }}</span>
+                            <span class="badge badge-primary badge-pill">{{ $fsol->platform }}</span>
                         </div>
                     </div>
                 @endforeach
-        </div>
-    </div>
+            @break
+        @case('subcategory')
+            <div class="container">
+                <div class="alert">
+                    <h3>
+                        {{ __('Sub-category : ') }} {{ $subcategory }}
+                    </h3>
+                </div>
+            </div>
+            @foreach ($fsols as $fsol)
+                <div class="card alert col-md-3 shadow d-inline-block" style="background-color: #f6f8fa; margin: 3%">
+                    <div class="row">
+                        <div class="col-8">
+                            <h4>
+                                <a href="{{ route('staticsolution', $fsol->id) }}">{{ $fsol->name }}</a>
+                            </h4>
+                        </div>
+                        <div class="col-4">
+                            {{ $fsol->amount }}
+                        </div>
+                    </div>
+                    <div>
+                        <span class="badge badge-primary badge-pill">{{ $fsol->category }}</span>
+                        <span class="badge badge-primary badge-pill">{{ $fsol->subcategory }}</span>
+                        <span class="badge badge-primary badge-pill">{{ $fsol->platform }}</span>
+                    </div>
+                </div>
+            @endforeach
+            @break
+        @case('platform')
+            <div class="container">
+                <div class="alert">
+                    <h3>
+                        {{ __('Platform : ') }} {{ $platform }}
+                    </h3>
+                </div>
+            </div>
+            @foreach ($fsols as $fsol)
+                <div class="card alert col-md-3 shadow d-inline-block" style="background-color: #f6f8fa; margin: 3%">
+                    <div class="row">
+                        <div class="col-8">
+                            <h4>
+                                <a href="{{ route('staticsolution', $fsol->id) }}">{{ $fsol->name }}</a>
+                            </h4>
+                        </div>
+                        <div class="col-4">
+                            {{ $fsol->amount }}
+                        </div>
+                    </div>
+                    <div>
+                        <span class="badge badge-primary badge-pill">{{ $fsol->category }}</span>
+                        <span class="badge badge-primary badge-pill">{{ $fsol->subcategory }}</span>
+                        <span class="badge badge-primary badge-pill">{{ $fsol->platform }}</span>
+                    </div>
+                </div>
+            @endforeach
+            @break
+        @default
+
+    @endswitch
 @endsection
-<script src="{{ asset('js/accueil.js') }}"></script>

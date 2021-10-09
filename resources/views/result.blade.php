@@ -14,18 +14,65 @@
             </div>
         </div>
     </div>
+    <!-- Filtrer les solutions par badges -->
+    <nav class="navbar navbar-expand bg-dark shadow-sm">
+        <div class="container d-flex justify-content-center">
+            <!-- Filtrer les solutions par catégories -->
+            <div class="dropdown show d-inline-block" style="margin-right: 3%">
+                <span class="navbar-item dropdown-toggle" style="color: white; padding:3%" type="button" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ __('Catégories') }}
+                </span>
+                <div class="dropdown-menu">
+                    @foreach ($categories as $categorie)
+                        <a class="btn" href=" {{ route('fcat', ['name'=> $categorie->name]) }} "><span class="badge badge-primary badge-pill">{{ $categorie->name }}</span></a>
+                    @endforeach
+                </div>
+            </div>
+            <!-- Filtrer les solutions par plateformes -->
+            <div class="dropdown show d-inline-block" style="margin-right: 3%">
+                <span class="navbar-item dropdown-toggle" style="color: white; padding:5%" type="button" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ __('Sous-categories') }}
+                </span>
+                <div class="dropdown-menu">
+                    @foreach ($subcategories as $subcategorie)
+                        <a class="btn" href="{{ route('fsubcat', ['id'=>$subcategorie->id]) }}"><span class="badge badge-primary badge-pill">{{ $subcategorie->name }}</span></a>
+                    @endforeach
+                </div>
+            </div>
+            <!-- Filtrer les solutions par os -->
+            <div class="dropdown show d-inline-block" style="margin-right: 3%">
+                <span class="navbar-item dropdown-toggle" style="color: white; padding:5%" type="button" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ __('Platform') }}
+                </span>
+                <div class="dropdown-menu">
+                    @foreach ($platforms as $platform)
+                        <a class="btn" href="{{ route('fplatform', ['id'=>$platform->id]) }}"><span class="badge badge-primary badge-pill">{{ $platform->name }}</span></a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </nav>
     @if ($nbsol == '0')
-        <div class="d-flex justify-content-center">
-            <div class="col-4" style="margin: 10%">
-                <div class="d-flex align-self-center" style="flex-direction: column">
+        <div class="container d-flex justify-content-center">
+            <div class="" style="margin: 2%">
+                <div class="" style="flex-direction: column">
                     <h3>
                         {{ __('Aucun résultat trouvé') }}
                     </h3>
                 </div>
-                <div>
-                    {{ __('Vérifiez l\'orthographe de votre recherche') }}
-                </div>
             </div>
+        </div>
+        <div class="container d-flex justify-content-center">
+            <span>{{ __('Vérifiez l\'orthographe de votre recherche ~ Ou explorer parmi les catégories') }}</span>
+        </div>
+        <div class="container-fluid">
+            @foreach ($categories as $categorie)
+                <div class="card alert col-md-3 d-inline-block" style="background-color: #f6f8fa; margin:2%">
+                    <h3><strong>
+                        <a href="{{ route('fcat', ['name'=>$categorie->name]) }}">{{ $categorie->name }}</a>
+                    </strong></h3>
+                </div>
+            @endforeach
         </div>
 
     @else

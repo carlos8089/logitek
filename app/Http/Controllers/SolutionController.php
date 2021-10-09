@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\Foreach_;
 
 class SolutionController extends Controller
 {
@@ -58,6 +59,14 @@ class SolutionController extends Controller
         $solution->sellable = $request->sellable;
         $solution->currency = $request->currency;
         $solution->amount = $request->amount;
+        //Save screenshots
+        $paths = [];
+        $files = $request->file('screens');
+        foreach ($files as $file) {
+            $path = $file->storePublicly('images', 'public');
+            array_push($paths, $path);
+        }
+        $solution->screens = serialize($paths);
         $solution->save();
 
         return redirect(route('solutions.index'));
@@ -74,7 +83,15 @@ class SolutionController extends Controller
         //
         $solutions = Solution::where('id',$solution->id)->get();
         $users = User::where('id',$solution->user_id)->get();
-        return view('boSolutionShow', compact('solutions','users'));
+        $sol = $solutions->first();
+        $screens = unserialize($sol->screens, ['allowed_classes' => false]);
+        //test the array
+        /*
+        foreach ($screens as $screen) {
+            echo $screen;
+        }
+        */
+        return view('boSolutionShow', compact('solutions','users', 'screens'));
     }
 
     /**

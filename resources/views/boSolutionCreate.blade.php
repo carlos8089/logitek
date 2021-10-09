@@ -17,7 +17,7 @@
             </div>
         @endif
         <div class="container-fluid">
-            <form action="{{ route('solutions.store') }}" method="POST" id="sol-create-form">
+            <form action="{{ route('solutions.store') }}" method="POST" id="sol-create-form" enctype="multipart/form-data">
                 @csrf
                 <div class="alert alert-dark">
                     {{ __('General informations')}}
@@ -90,6 +90,14 @@
                     </div>
                     <div class="col-md-7">
                         <textarea class="form-control" name="desc" id="" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label for="">{{ __('Screenshots') }}</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="file" name="screens[]" id="" multiple>
                     </div>
                 </div>
                 <div class="form-group row">

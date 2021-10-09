@@ -22,6 +22,7 @@ class CreateSolutionsTable extends Migration
             $table->string('platform');
             $table->string('os');
             $table->text('desc');
+            $table->string('screens');
             $table->string('site');
             $table->boolean('sellable')->default('0');
             $table->string('currency')->nullable();

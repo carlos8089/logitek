@@ -23,7 +23,8 @@ class StaticController extends Controller
         $solutions = Solution::where('id',$solution)->get();
         $sol = $solutions->first();
         $users = User::where('id',$sol->user_id)->get();
-        return view('solutionShow', compact('solutions','users'));
+        $screens = unserialize($sol->screens);
+        return view('solutionShow', compact('solutions','users', 'screens'));
     }
 
     public function search(Request $request){

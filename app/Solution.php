@@ -14,7 +14,12 @@ class Solution extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name', 'category', 'subcategory', 'platform', 'os', 'desc', 'site', 'sellable', 'currency', 'amount'
+        'user_id', 'name', 'category', 'subcategory', 'platform', 'os', 'desc','screens', 'site', 'sellable', 'currency', 'amount'
     ];
 
+    /*
+    protected $casts = [
+        'screens' => 'array'
+    ];
+    */
 }

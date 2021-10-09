@@ -53,6 +53,11 @@
                     {{ __('Screenshots')}}
                 </h2>
             </div>
+            @foreach ($screens as $screen)
+                <div class="card alert col-md-3 shadow- d-inline-block">
+                    <img src="{{ asset('storage/'.$screen) }}" alt="" srcset="" width="200" height="121">
+                </div>
+            @endforeach
         </div>
     @endforeach
 @endsection

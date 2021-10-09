@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3" id="Screens">
                     <div class="container-fluid">
                         <nav class="navbar">
                             <span class="navbar-brand">
@@ -70,6 +70,11 @@
                             </span>
                         </nav>
                     </div>
+                    @foreach ($screens as $screen)
+                        <div class="col-md-2" style="margin: 1.5%">
+                            <img src="{{ asset('storage/'.$screen) }}" alt="" srcset="" width="200" height="121">
+                        </div>
+                    @endforeach
                 </div>
             </div>
         @endforeach

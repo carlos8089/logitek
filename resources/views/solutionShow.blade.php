@@ -77,17 +77,8 @@
                 </div>
             </div>
             <div id="comments" class="container">
-                <nav class="navbar">
-                    <div class="navbar-brand" style="margin: 0% 0% 2% 0%">
-                        <h3>
-                            <strong><span>{{ __('Comments') }}</span></strong>
-                        </h3>
-                    </div>
-                    <!--
-                    <a type="button" class="btn btn-success" onclick="">{{ __('Comment') }}</a>
-                    -->
-                </nav>
                 <div id="commentForm">
+                    <h3><strong><span>{{ __('Add your comment') }}</span></strong></h3>
                     <form action="{{ route('comments.store') }}" method="post">
                         @csrf
                         <div class=" d-flex justify-content-center" style="background-color: red">
@@ -101,6 +92,16 @@
                         </div>
                     </form>
                 </div>
+                <nav class="navbar">
+                    <div class="navbar-brand" style="margin: 0% 0% 1% 0%">
+                        <h3>
+                            <strong><span>{{ __('Comments') }}</span></strong>
+                        </h3>
+                    </div>
+                    <!--
+                    <a type="button" class="btn btn-success" onclick="">{{ __('Comment') }}</a>
+                    -->
+                </nav>
                 @foreach ($comments as $comment)
                     <div class="" style="margin-bottom: 1.5%">
                         <div class="row" style="margin-bottom: 1%; margin-left: 1%">

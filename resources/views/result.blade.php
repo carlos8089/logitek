@@ -67,7 +67,7 @@
         </div>
         <div class="container-fluid">
             @foreach ($categories as $categorie)
-                <div class="card alert col-md-3 d-inline-block" style="background-color: #f6f8fa; margin:2%">
+                <div class="card alert col-md-3 d-inline-block" style="background-color: #f6f8fa;  margin: 2%">
                     <h3><strong>
                         <a href="{{ route('fcat', ['name'=>$categorie->name]) }}">{{ $categorie->name }}</a>
                     </strong></h3>
@@ -76,28 +76,28 @@
         </div>
 
     @else
-        @foreach ($solutions ?? '' as $solution)
-            <div class="d-flex justify-content-center">
-                <div class="card alert col-6">
-                    <nav class="navbar">
-                        <div class="container-fluid">
-                            <span class="navbar-brand">
-                                <h2><strong>{{ $solution->name }}</strong></h2>
-                            </span>
-                            <span>
-                                <h2><strong>{{ $solution->amount }}</strong></h2>
-                            </span>
-                        </div>
-                    </nav>
+        <div class="container-fluid" style="margin-top: 3%">
+            @foreach ($solutions ?? '' as $solution)
+            <div class="card alert col-md-4 d-inline-block" style="background-color:#f6f8fa; margin: 0.2% 7% 3%">
+                <nav class="navbar">
                     <div class="container-fluid">
-                        <h4>
-                            <span class="badge badge-primary badge-pill">{{ $solution->category }}</span>
-                            <span class="badge badge-primary badge-pill">{{ $solution->subcategory }}</span>
-                            <span class="badge badge-primary badge-pill">{{ $solution->platform }}</span>
-                        </h4>
+                        <span class="navbar-brand">
+                            <h2><strong>{{ $solution->name }}</strong></h2>
+                        </span>
+                        <span>
+                            <h2><strong>{{ $solution->amount }}</strong></h2>
+                        </span>
                     </div>
+                </nav>
+                <div class="container-fluid">
+                    <h4>
+                        <span class="badge badge-primary badge-pill">{{ $solution->category }}</span>
+                        <span class="badge badge-primary badge-pill">{{ $solution->subcategory }}</span>
+                        <span class="badge badge-primary badge-pill">{{ $solution->platform }}</span>
+                    </h4>
                 </div>
             </div>
-        @endforeach
+    @endforeach
+        </div>
     @endif
 @endsection

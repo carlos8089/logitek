@@ -35,7 +35,7 @@ class StaticController extends Controller
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
         $solution =$request->stsearch;
-        $solutions = Solution::where('name', $solution)->get();
+        $solutions = Solution::where('name', 'like', "%$solution%")->get();
         $nbsol = $solutions->count();
         return view('result', compact('solutions', 'nbsol', 'categories', 'subcategories', 'platforms'));
     }

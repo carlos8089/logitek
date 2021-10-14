@@ -29,6 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Wroten routes
 */
 Route::resource('solutions', SolutionController::class);
+Route::resource('comments', CommentController::class);
 Route::get('/','StaticController@accueil');
 Route::get('/sol/{sol}', [StaticController::class,'solution'])->name('staticsolution');
 Route::get('/search', [StaticController::class, 'search'])->name('staticsearch');
@@ -47,7 +48,7 @@ Route::get('/projects', function(){
 });
 
 Route::get('sol/categories/{name}', [StaticController::class, 'interceptCatName'])->name('fcat');
-Route::get('sol/subcategories/{id}', [StaticController::class, 'fsubcat'])->name('fsubcat');
-Route::get('sol/platforms/{id}', [StaticController::class, 'fpltform'])->name('fplatform');
+Route::get('sol/subcategories/{name}', [StaticController::class, 'interceptSubcatName'])->name('fsubcat');
+Route::get('sol/platforms/{name}', [StaticController::class, 'interceptPlatName'])->name('fplatform');
 Route::post('/store', [StaticController::class, 'storeFiles'])->name('uploads');
 Route::view('/test', 'test');

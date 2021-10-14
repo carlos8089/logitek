@@ -35,18 +35,18 @@
                 </span>
                 <div class="dropdown-menu">
                     @foreach ($subcategories as $subcategorie)
-                        <a class="btn" href="{{ route('fsubcat', ['id'=>$subcategorie->id]) }}"><span class="badge badge-primary badge-pill">{{ $subcategorie->name }}</span></a>
+                        <a class="btn" href="{{ route('fsubcat', ['name'=>$subcategorie->name]) }}"><span class="badge badge-primary badge-pill">{{ $subcategorie->name }}</span></a>
                     @endforeach
                 </div>
             </div>
-            <!-- Filtrer les solutions par os -->
+            <!-- Filtrer les solutions par platform -->
             <div class="dropdown show d-inline-block" style="margin-right: 3%">
                 <span class="navbar-item dropdown-toggle" style="color: white; padding:5%" type="button" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ __('Platform') }}
                 </span>
                 <div class="dropdown-menu">
                     @foreach ($platforms as $platform)
-                        <a class="btn" href="{{ route('fplatform', ['id'=>$platform->id]) }}"><span class="badge badge-primary badge-pill">{{ $platform->name }}</span></a>
+                        <a class="btn" href="{{ route('fplatform', ['name'=>$platform->name]) }}"><span class="badge badge-primary badge-pill">{{ $platform->name }}</span></a>
                     @endforeach
                 </div>
             </div>
@@ -60,7 +60,7 @@
     <div class="alert">
         <div id="grill" class="container-fluid">
                 @foreach ($solutions as $solution)
-                    <div class="card alert col-md-3 shadow d-inline-block" style="background-color: #f6f8fa; margin: 3%">
+                    <div class="card alert col-md-3 shadow d-inline-block" style="background-color: #f6f8fa; margin: 0.2% 3.5%  3%">
                         <div class="row">
                             <div class="col-8">
                                 <h4>
@@ -78,6 +78,9 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="container d-flex justify-content-center">
+                    {{ $solutions->links() }}
+                </div>
         </div>
     </div>
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Subcategorie;
 use Illuminate\Database\Seeder;
 
 class SubcategorieSeeder extends Seeder
@@ -11,6 +12,6 @@ class SubcategorieSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Subcategorie::class, 10)->create();
     }
 }

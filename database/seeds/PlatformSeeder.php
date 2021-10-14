@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Platform;
 
 class PlatformSeeder extends Seeder
 {
@@ -11,6 +12,6 @@ class PlatformSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Platform::class, 5)->create();
     }
 }

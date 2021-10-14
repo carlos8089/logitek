@@ -35,7 +35,7 @@
                 </span>
                 <div class="dropdown-menu">
                     @foreach ($subcategories as $subcategorie)
-                        <a class="btn" href="{{ route('fsubcat', ['id'=>$subcategorie->id]) }}"><span class="badge badge-primary badge-pill">{{ $subcategorie->name }}</span></a>
+                        <a class="btn" href="{{ route('fsubcat', ['name'=>$subcategorie->name]) }}"><span class="badge badge-primary badge-pill">{{ $subcategorie->name }}</span></a>
                     @endforeach
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 </span>
                 <div class="dropdown-menu">
                     @foreach ($platforms as $platform)
-                        <a class="btn" href="{{ route('fplatform', ['id'=>$platform->id]) }}"><span class="badge badge-primary badge-pill">{{ $platform->name }}</span></a>
+                        <a class="btn" href="{{ route('fplatform', ['name'=>$platform->name]) }}"><span class="badge badge-primary badge-pill">{{ $platform->name }}</span></a>
                     @endforeach
                 </div>
             </div>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 @foreach ($fsols as $fsol)
-                    <div class="card alert col-md-3 shadow d-inline-block" style="background-color: #f6f8fa; margin: 3%">
+                    <div class="card alert col-md-3 shadow d-inline-block" style="background-color: #f6f8fa; margin: 0.2% 3.5% 3%">
                         <div class="row">
                             <div class="col-8">
                                 <h4>
@@ -80,6 +80,9 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="container d-flex justify-content-center">
+                    {{ $fsols->links() }}
+                </div>
             @break
         @case('subcategory')
             <div class="container">
@@ -90,7 +93,7 @@
                 </div>
             </div>
             @foreach ($fsols as $fsol)
-                <div class="card alert col-md-3 shadow d-inline-block" style="background-color: #f6f8fa; margin: 3%">
+                <div class="card alert col-md-3 shadow d-inline-block" style="background-color: #f6f8fa; margin: 0.2% 3.5% 3%">
                     <div class="row">
                         <div class="col-8">
                             <h4>
@@ -108,17 +111,20 @@
                     </div>
                 </div>
             @endforeach
+            <div class="container d-flex justify-content-center">
+                {{ $fsols->links() }}
+            </div>
             @break
         @case('platform')
             <div class="container">
                 <div class="alert">
                     <h3>
-                        {{ __('Platform : ') }} {{ $platform }}
+                        {{ __('Platform : ') }} {{ $platforme }}
                     </h3>
                 </div>
             </div>
             @foreach ($fsols as $fsol)
-                <div class="card alert col-md-3 shadow d-inline-block" style="background-color: #f6f8fa; margin: 3%">
+                <div class="card alert col-md-3 shadow d-inline-block" style="background-color: #f6f8fa; margin: 0.2% 3.5% 3%">
                     <div class="row">
                         <div class="col-8">
                             <h4>
@@ -136,6 +142,9 @@
                     </div>
                 </div>
             @endforeach
+            <div class="container d-flex justify-content-center">
+                {{ $fsols->links() }}
+            </div>
             @break
         @default
 

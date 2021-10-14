@@ -24,7 +24,7 @@
         <div class="justify-content-end">
             @if ($solutions !== null)
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-striped">
                         <thead class="thead-dark">
                             <tr>
                               <th scope="col">Name</th>
@@ -47,7 +47,9 @@
                         </tbody>
                     </table>
                 </div>
-
+                <div class="container d-flex justify-content-center">
+                    {{ $solutions->links() }}
+                </div>
             @else
                 {{ __('No solution yet')}}
             @endif

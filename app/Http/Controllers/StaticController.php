@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Categorie;
+use App\Comment;
 use Illuminate\Http\Request;
 use App\Solution;
 use App\Subcategorie;
 use App\Platform;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 class StaticController extends Controller
 {
     public function accueil(){
-        $solutions = Solution::all();
+        $solutions = Solution::paginate(12);
         $categories = Categorie::all();
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
@@ -24,7 +26,8 @@ class StaticController extends Controller
         $sol = $solutions->first();
         $users = User::where('id',$sol->user_id)->get();
         $screens = unserialize($sol->screens);
-        return view('solutionShow', compact('solutions','users', 'screens'));
+        $comments = $sol->comments->sortByDesc('created_at');
+        return view('solutionShow', compact('solutions','users', 'screens', 'comments'));
     }
 
     public function search(Request $request){
@@ -44,8 +47,7 @@ class StaticController extends Controller
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
         $cat = Categorie::where('id', $categorie)->first();
-        $fsols = Solution::where('category', $cat->name)->get();
-        //$filters = $categories;
+        $fsols = Solution::where('category', $cat->name)->paginate(18);
         return view('filter', compact('fsols', 'categories', 'subcategories', 'platforms'))->with('type', 'category')
                                                                                             ->with('category',$cat->name);
     }
@@ -55,7 +57,7 @@ class StaticController extends Controller
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
         $sub = Subcategorie::where('id', $subcategorie)->first();
-        $fsols = Solution::where('subcategory', $sub->name)->get();
+        $fsols = Solution::where('subcategory', $sub->name)->paginate(18);
         return view('filter', compact('fsols', 'categories', 'subcategories', 'platforms'))->with('type','subcategory')
                                                 ->with('subcategory', $sub->name);
     }
@@ -65,9 +67,9 @@ class StaticController extends Controller
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
         $plat = Platform::where('id', $platform)->first();
-        $fsols = Solution::where('platform', $plat->name)->get();
+        $fsols = Solution::where('platform', $plat->name)->paginate(18);
         return view('filter', compact('fsols', 'categories', 'subcategories', 'platforms'))->with('type','platform')
-                                                ->with('platform', $plat->name);
+                                                ->with('platforme', $plat->name);
     }
 
     public function interceptCatName($value){

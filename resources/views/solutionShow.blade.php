@@ -39,8 +39,7 @@
                     </div>
                     <div id="intouch">
                         <div class="container">
-                            <nav class="navbar ">
-
+                            <nav class="navbar">
                                 <div class="d-flex justify-content-end">
                                     @foreach ($users as $user)
                                     <span class="navbar-brand">
@@ -76,6 +75,45 @@
                         </div>
                     @endforeach
                 </div>
+            </div>
+            <div id="comments" class="container">
+                <nav class="navbar">
+                    <div class="navbar-brand" style="margin: 0% 0% 2% 0%">
+                        <h3>
+                            <strong><span>{{ __('Comments') }}</span></strong>
+                        </h3>
+                    </div>
+                    <!--
+                    <a type="button" class="btn btn-success" onclick="">{{ __('Comment') }}</a>
+                    -->
+                </nav>
+                <div id="commentForm">
+                    <form action="{{ route('comments.store') }}" method="post">
+                        @csrf
+                        <div class=" d-flex justify-content-center" style="background-color: red">
+                            <input type="text" name="solution_id" id="solution_id" value="{{ $solu->id }}" hidden>
+                        </div>
+                        <div class="col-9">
+                            <textarea class="form-control" name="content" id="content" cols="10" rows="3" scrollable></textarea>
+                            <div class="d-flex justify-content-end" style="margin-top: 1%">
+                                <input class="btn btn-success" type="submit" value="Comment">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                @foreach ($comments as $comment)
+                    <div class="" style="margin-bottom: 1.5%">
+                        <div class="row" style="margin-bottom: 1%; margin-left: 1%">
+                            <span>{{ __('Par : ') }} {{ $comment->user->name }}</span>
+                        </div>
+                        <div class="card" style="padding: 2%; margin-bottom: 1%">
+                            {{ $comment->content }}
+                        </div>
+                        <div class="d-flex justify-content-end" style="margin-bottom: 1%">
+                            <span>{{ __('Publié : ') }} {{ $comment->created_at }}</span>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         @endforeach
     </div>

@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('category');
+            $table->string('category')->default('single');
             $table->string('name');
             $table->string('country')->default('Togo');
             $table->string('tel')->default('');

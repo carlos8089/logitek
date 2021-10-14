@@ -23,7 +23,7 @@ class SolutionController extends Controller
     public function index()
     {
         //
-        $solutions = Solution::where('user_id', $this->getid())->get();
+        $solutions = Solution::where('user_id', $this->getid())->paginate(20);
         return view('boSolutionIndex', compact('solutions'));
     }
 
@@ -66,6 +66,7 @@ class SolutionController extends Controller
             $path = $file->storePublicly('images', 'public');
             array_push($paths, $path);
         }
+        //serialize screenshots paths to make them storable
         $solution->screens = serialize($paths);
         $solution->save();
 
@@ -84,13 +85,9 @@ class SolutionController extends Controller
         $solutions = Solution::where('id',$solution->id)->get();
         $users = User::where('id',$solution->user_id)->get();
         $sol = $solutions->first();
+        //unserialize screenshots paths
         $screens = unserialize($sol->screens, ['allowed_classes' => false]);
-        //test the array
-        /*
-        foreach ($screens as $screen) {
-            echo $screen;
-        }
-        */
+
         return view('boSolutionShow', compact('solutions','users', 'screens'));
     }
 

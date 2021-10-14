@@ -35,7 +35,7 @@
                 </span>
                 <div class="dropdown-menu">
                     @foreach ($subcategories as $subcategorie)
-                        <a class="btn" href="{{ route('fsubcat', ['id'=>$subcategorie->id]) }}"><span class="badge badge-primary badge-pill">{{ $subcategorie->name }}</span></a>
+                        <a class="btn" href="{{ route('fsubcat', ['name'=>$subcategorie->name]) }}"><span class="badge badge-primary badge-pill">{{ $subcategorie->name }}</span></a>
                     @endforeach
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 </span>
                 <div class="dropdown-menu">
                     @foreach ($platforms as $platform)
-                        <a class="btn" href="{{ route('fplatform', ['id'=>$platform->id]) }}"><span class="badge badge-primary badge-pill">{{ $platform->name }}</span></a>
+                        <a class="btn" href="{{ route('fplatform', ['name'=>$platform->name]) }}"><span class="badge badge-primary badge-pill">{{ $platform->name }}</span></a>
                     @endforeach
                 </div>
             </div>

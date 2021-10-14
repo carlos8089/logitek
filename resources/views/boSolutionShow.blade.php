@@ -1,7 +1,7 @@
 @extends('layouts.backoff')
 @section('boContent')
     @foreach ($solutions as $solu)
-            <div class="row">
+        <div class="row">
                 <div class="col-10">
                     <nav class="navbar">
                         <div class="container-fluid">
@@ -17,7 +17,7 @@
                 <div class="col-2">
                     <a class="btn btn-warning" href="{{ route('solutions.edit', ['solution'=>$solu->id]) }}" class="d-flex">{{ __('Edit infos')}}</a>
                 </div>
-            </div>
+        </div>
         <div>
             <div class="container-fluid">
                 <h4>

@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-class SolutionSeeder extends Seeder
+
+class CommentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -10,6 +11,7 @@ class SolutionSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Solution::class, 500)->create();
+        //
+        factory(App\Comment::class, 1000)->create();
     }
 }

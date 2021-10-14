@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Solution extends Model
 {
@@ -22,4 +23,14 @@ class Solution extends Model
         'screens' => 'array'
     ];
     */
+
+    //retrieve a user related a soltuion
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    //retrieve a soltution's comments
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

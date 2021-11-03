@@ -41,7 +41,15 @@
                                 <th>{{ $solution->category }}</th>
                                 <th>{{ $solution->platform }}</th>
                                 <th>{{ $solution->amount }}</th>
-                                <th><a href="{{ route('solutions.show', ['solution'=> $solution->id]) }} " type="button" class="btn btn-outline-primary">{{ __('Solution page') }}</a></th>
+                                <th><a href="{{ route('solutions.show', ['solution'=> $solution->id]) }} " type="button" class="btn btn-outline-primary">{{ __('Show') }}</a></th>
+                                <th><a href="{{ route('solutions.edit', ['solution'=> $solution->id]) }} " type="button" class="btn btn-warning">{{ __('Edit') }}</a></th>
+                                <th>
+                                    <form action="{{ route('solutions.destroy', ['solution'=> $solution->id]) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                    </form>
+                                </th>
                             </tr>
                             @endforeach
                         </tbody>

@@ -1,8 +1,5 @@
 <?php
 
-use App\Comment;
-use App\Solution;
-use App\Subcategorie;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

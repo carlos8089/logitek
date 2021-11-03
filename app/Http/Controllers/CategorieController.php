@@ -14,7 +14,9 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categorie::paginate(4);
+        $countCat = Categorie::all()->count();
+        return view('admin.categories.categories', compact('categories'))->with('count', $countCat);
     }
 
     /**
@@ -24,7 +26,7 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,16 +37,20 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cat = new Categorie();
+        $cat->name = $request->name;
+        $cat->save();
+
+        return redirect()->route('categories.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Categorie  $categorie
+     * @param  \App\Categorie  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Categorie $categorie)
+    public function show(Categorie $category)
     {
         //
     }
@@ -52,10 +58,10 @@ class CategorieController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Categorie  $categorie
+     * @param  \App\Categorie  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorie $categorie)
+    public function edit(Categorie $category)
     {
         //
     }
@@ -64,10 +70,10 @@ class CategorieController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Categorie  $categorie
+     * @param  \App\Categorie  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(Request $request, Categorie $category)
     {
         //
     }
@@ -75,11 +81,14 @@ class CategorieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Categorie  $categorie
+     * @param  \App\Categorie  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorie $categorie)
+    public function destroy($category)
     {
-        //
+            $cat = Categorie::find($category);
+            $cat->delete();
+
+            return redirect()->route('categories.index');
     }
 }

@@ -42,21 +42,21 @@ class StaticController extends Controller
 
     //Pages de filtres
 
-    public function fcat($categorie){
+    public function fcat($category){
         $categories = Categorie::all();
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
-        $cat = Categorie::where('id', $categorie)->first();
+        $cat = Categorie::where('id', $category)->first();
         $fsols = Solution::where('category', $cat->name)->paginate(18);
         return view('filter', compact('fsols', 'categories', 'subcategories', 'platforms'))->with('type', 'category')
                                                                                             ->with('category',$cat->name);
     }
 
-    public function fsub($subcategorie){
+    public function fsub($subcategory){
         $categories = Categorie::all();
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
-        $sub = Subcategorie::where('id', $subcategorie)->first();
+        $sub = Subcategorie::where('id', $subcategory)->first();
         $fsols = Solution::where('subcategory', $sub->name)->paginate(18);
         return view('filter', compact('fsols', 'categories', 'subcategories', 'platforms'))->with('type','subcategory')
                                                 ->with('subcategory', $sub->name);
@@ -74,13 +74,13 @@ class StaticController extends Controller
 
     public function interceptCatName($value){
         $cat = Categorie::where('name', $value)->first();
-        $categorie = $cat->id;
-        return $this->fcat($categorie);
+        $category = $cat->id;
+        return $this->fcat($category);
     }
     public function interceptSubcatName($value){
         $sub = Subcategorie::where('name', $value)->first();
-        $subcategorie = $sub->id;
-        return $this->fsub($subcategorie);
+        $subcategory = $sub->id;
+        return $this->fsub($subcategory);
     }
     public function interceptPlatName($value){
         $plat = Platform::where('name', $value)->first();

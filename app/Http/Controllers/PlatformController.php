@@ -14,7 +14,10 @@ class PlatformController extends Controller
      */
     public function index()
     {
-        //
+        $platforms = Platform::paginate(5);
+        $countPlat = Platform::all()->count();
+
+        return view('admin.platforms', compact('platforms'))->with('count', $countPlat);
     }
 
     /**
@@ -35,7 +38,11 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $plat = new Platform();
+        $plat->name = $request->name;
+        $plat->save();
+
+        return redirect()->route('platforms.index');
     }
 
     /**

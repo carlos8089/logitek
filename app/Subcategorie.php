@@ -14,7 +14,7 @@ class Subcategorie extends Model
     */
     protected $fillable = ['categorie_id', 'name'];
 
-    public function category(){
-        return $this->belongsTo(Categorie::class);
+    public function categorie(){
+        return $this->belongsTo('App\Categorie', 'categorie_id');
     }
 }

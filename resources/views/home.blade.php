@@ -1,14 +1,11 @@
 @extends('layouts.backoff')
 @section('boContent')
 <div class="card">
-    <div class="card-header">
-        <nav class="navbar">
-            <div class="container-fluid">
-                <span class="navbar-brand"><h3><strong>{{ __('Dashboard') }}</strong></h3></span>
-            </div>
-        </nav>
-    </div>
-
+    <nav class="navbar">
+        <div class="container-fluid">
+            <span class="navbar-brand"><h3><strong>{{ __('Dashboard') }}</strong></h3></span>
+        </div>
+    </nav>
     <div class="card-body">
         @if (session('status'))
             <div class="alert alert-success" role="alert">

@@ -25,7 +25,7 @@
             position: relative;
             left: 0;
             top: 0;
-            bottom:0;
+            margin-bottom: 2%;
             right: 0;
             overflow: auto;
             /*background-color: red;*/
@@ -54,6 +54,18 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="btn btn-warning nav-link dropdown-toogle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ __('Messages') }}</a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <nav class="dropdown-item">
+                                    <ul>
+                                        <li><span>{{ __('Message 1') }}</span></li>
+                                    </ul>
+                                </nav>
+                                <a class="dropdown-item" href="{{ url('/admin/messages') }}" role="button" class="btn btn-primary"><span>{{ __('View all') }}</span></a>
+                            </div>
+                        </li>
+
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -93,7 +105,14 @@
             <!-- Message test Vue
                 @{{message}}
             -->
-            @yield('content')
+            <div class="container-fluid">
+                <div class="row" style="margin-top: 1%">
+                    @include('admin.sideBar')
+                    <div class="col-md-10">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <footer class="bg-dark text-default">
@@ -104,14 +123,13 @@
             bottom: 0;
             width: 100%;
             overflow: auto;
+            text-align: center;
             color: rgb(218, 218, 218);
         }
         </style>
-        @yield('footer')
-        <div style="text-align: center">
+        <div>
             <span>{{ __('copyright logitek@2021') }}</span>
         </div>
-
     </footer>
 </body>
 </html>

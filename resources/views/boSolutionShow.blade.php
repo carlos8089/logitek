@@ -15,7 +15,7 @@
                     </nav>
                 </div>
                 <div class="col-2">
-                    <a class="btn btn-warning" href="{{ route('solutions.edit', ['solution'=>$solu->id]) }}" class="d-flex">{{ __('Edit infos')}}</a>
+                    <a class="btn btn-warning" href="{{ route('solutions.edit', $solu->id) }}" class="d-flex">{{ __('Edit infos')}}</a>
                 </div>
         </div>
         <div>

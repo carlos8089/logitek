@@ -34,4 +34,8 @@ class HomeController extends Controller
         $nbsol = $sol->count();
         return view('home')->with('nbsolutions',$nbsol);
     }
+
+    public function message(){
+
+    }
 }

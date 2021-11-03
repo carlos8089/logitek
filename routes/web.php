@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\SolutionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +31,24 @@ Route::get('/home', 'HomeController@index')->name('home');
 /*
 Wroten routes
 */
-Route::resource('solutions', SolutionController::class);
+//Admin routes
+Route::resource('users', UserController::class);
+Route::resource('categories', CategorieController::class);
+Route::resource('subcategories', SubcategorieController::class);
+Route::resource('platforms', PlatformController::class);
+Route::resource('messages', MessageController::class);
+
+Route::get('/admin', [AdminController::class, 'index'])->name('Admin');
+Route::get('/admin/solutions', [AdminController::class, 'solutions'])->name('admin.solutions');
+Route::get('/admin/users', 'UserController@index');
+Route::get('/admin/categories', 'CategorieController@index');
+Route::get('/admin/subcategories', 'SubcategorieController@index');
+Route::get('/admin/platforms', 'PlatformController@index');
+Route::get('/admin/messages', 'MessageController@index');
+
+
+//Main app routes
+Route::resource('solutions', 'SolutionController');
 Route::resource('comments', CommentController::class);
 Route::get('/','StaticController@accueil');
 Route::get('/sol/{sol}', [StaticController::class,'solution'])->name('staticsolution');
@@ -52,3 +72,4 @@ Route::get('sol/subcategories/{name}', [StaticController::class, 'interceptSubca
 Route::get('sol/platforms/{name}', [StaticController::class, 'interceptPlatName'])->name('fplatform');
 Route::post('/store', [StaticController::class, 'storeFiles'])->name('uploads');
 Route::view('/test', 'test');
+

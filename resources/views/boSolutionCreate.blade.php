@@ -36,12 +36,9 @@
                     </div>
                     <div class="col-md-7">
                         <select class="form-control" name="category" id="">
-                            <option value="dvt">Divertissement</option>
-                            <option value="edu">Education</option>
-                            <option value="fin">Finance</option>
-                            <option value="rh">Ressources Humaines</option>
-                            <option value="sbe">Santé & bien être</option>
-                            <option value="tel">Télécommunication</option>
+                            @foreach ($categories as $cat)
+                                <option value="{{ $cat->name }}">{{ $cat->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -51,12 +48,9 @@
                     </div>
                     <div class="col-md-7">
                         <select class="form-control" name="subcategory" id="">
-                            <option value="cpt">Comptabilité</option>
-                            <option value="fit">Fitness</option>
-                            <option value="gpl">Gestion de personnel</option>
-                            <option value="lan">Langue</option>
-                            <option value="str">Streaming</option>
-                            <option value="rnt">Rencontre</option>
+                            @foreach ($subcategories as $sub)
+                                <option value="{{ $sub->name }}">{{ $sub->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -66,13 +60,9 @@
                     </div>
                     <div class="col-md-7">
                         <select name="platform" id="" class="form-control">
-                            <option value="all">All mobile platform</option>
-                            <option value="and">Android</option>
-                            <option value="ios">iOS</option>
-                            <option value="dsk">Desktop</option>
-                            <option value="web">Client web</option>
-                            <option value="sof">SaaS Software</option>
-                            <option value="oth">Other(s)</option>
+                            @foreach ($platforms as $plat)
+                                <option value="{{ $plat->name }}">{{ $plat->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -97,7 +87,7 @@
                         <label for="">{{ __('Screenshots') }}</label>
                     </div>
                     <div class="col-md-7">
-                        <input type="file" name="screens[]" id="" multiple>
+                        <input class="btn btn-primary" type="file" name="screens[]" id="" multiple>
                     </div>
                 </div>
                 <div class="form-group row">

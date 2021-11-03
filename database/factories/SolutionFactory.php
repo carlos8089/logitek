@@ -16,7 +16,7 @@ $factory->define(Solution::class, function(Faker $faker){
     //$plats = Platform::all();
     $plat = Platform::where('id', rand(1,4))->first();
     return [
-            'user_id' => $faker->randomDigit,
+            'user_id' => '16',// $faker->randomDigit,
             'name' => $faker->name,
             'category' => $cat->name,
             'subcategory' => $sub->name,

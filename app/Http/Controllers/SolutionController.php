@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Categorie;
+use App\Platform;
 use App\Solution;
+use App\Subcategorie;
 use App\User;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
@@ -11,6 +14,17 @@ use PhpParser\Node\Stmt\Foreach_;
 
 class SolutionController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'delete']]);
+        $this->middleware('auth', ['except'=>['index', 'show']]);
+    }
+
     public static function getid(){
         $uid = Auth::id();
         return $uid;
@@ -34,8 +48,11 @@ class SolutionController extends Controller
      */
     public function create()
     {
-        //
-        return view('boSolutionCreate');
+        $categories = Categorie::all();
+        $subcategories = Subcategorie::all();
+        $platforms = Platform::all();
+
+        return view('boSolutionCreate', compact('categories','subcategories','platforms'));
     }
 
     /**
@@ -44,8 +61,7 @@ class SolutionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //
         $solution = new Solution;
         $solution->user_id = $this->getid();
@@ -60,7 +76,9 @@ class SolutionController extends Controller
         $solution->currency = $request->currency;
         $solution->amount = $request->amount;
         //Save screenshots
-        $paths = [];
+        if ($request->file !== 'null') {
+            # code...
+            $paths = [];
         $files = $request->file('screens');
         foreach ($files as $file) {
             $path = $file->storePublicly('images', 'public');
@@ -68,6 +86,9 @@ class SolutionController extends Controller
         }
         //serialize screenshots paths to make them storable
         $solution->screens = serialize($paths);
+        } else {
+            # code...
+        }
         $solution->save();
 
         return redirect(route('solutions.index'));
@@ -81,7 +102,6 @@ class SolutionController extends Controller
      */
     public function show(Solution $solution)
     {
-        //
         $solutions = Solution::where('id',$solution->id)->get();
         $users = User::where('id',$solution->user_id)->get();
         $sol = $solutions->first();
@@ -97,9 +117,9 @@ class SolutionController extends Controller
      * @param  \App\Solution  $solution
      * @return \Illuminate\Http\Response
      */
-    public function edit(Solution $solution)
+    public function edit($solution)
     {
-        //
+        return view('boSolutionEdit')->with('sol',$solution);
     }
 
     /**
@@ -109,9 +129,13 @@ class SolutionController extends Controller
      * @param  \App\Solution  $solution
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Solution $solution)
+    public function update(Request $request, $solution)
     {
-        //
+        $sol = Solution::find($solution);
+        $sol->name = $request->name;
+        $sol->save();
+
+        return redirect()->route('solutions.show', $solution);
     }
 
     /**
@@ -120,8 +144,11 @@ class SolutionController extends Controller
      * @param  \App\Solution  $solution
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Solution $solution)
+    public function destroy($solution)
     {
-        //
+        $sol = Solution::find($solution);
+        $sol->delete();
+
+        return redirect()->route('solutions.index');
     }
 }

@@ -39,18 +39,24 @@
                     </div>
                     <div id="intouch">
                         <div class="container">
-                            <nav class="navbar">
-                                <div class="d-flex justify-content-end">
-                                    @foreach ($users as $user)
+                            @foreach ($users as $user)
                                     <span class="navbar-brand">
                                         {{ __('Par ') }} {{$user->name}}
                                     </span>
-                                    <a class="btn btn-outline-primary" style="margin-left: 0.9%" href="{{ $solu->site }}" target="_blank" rel="noopener noreferrer">{{ __('Website') }}</a>
-                                        <a class="btn btn-outline-secondary" style="margin-left: 0.9%" href="mailto:{{$user->email}}">{{ __('Message') }}</a>
-                                        <a class="btn btn-outline-success" style="margin-left: 0.9%" href="tel:+{{$user->tel}}">{{ __('Call') }}</a>
-                                    @endforeach
-                                </div>
-                            </nav>
+                                    <div class="">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <a class="btn btn-outline-primary" style="margin-left: 0.9%; width:100%" href="{{ $solu->site }}" target="_blank" rel="noopener noreferrer">{{ __('Website') }}</a>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a class="btn btn-outline-secondary" style="margin-left: 0.9%; width:100%" href="mailto:{{$user->email}}"><span style="margin-right: 5%">{{ __('Message') }}</span><x-bi-chat-text-fill/></a>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a class="btn btn-outline-success" style="margin-left: 0.9%; width:100%" href="tel:+{{$user->tel}}">{{ __('Call') }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            @endforeach
                         </div>
                     </div>
                     <div style="margin-top: 2%">
@@ -95,7 +101,7 @@
                     </form>
                 @else
                     <div class="card alert">
-                        {{ __('You must logged in to comment') }}
+                        <strong>{{ __('You must be logged in to comment') }}</strong>
                     </div>
                 @endif
                 @auth
@@ -106,6 +112,7 @@
                         <h3>
                             <strong><span>{{ __('Comments') }}</span></strong>
                         </h3>
+                        <div><span>{{ $totalComment }} {{ __(' till now') }}</span></div>
                     </div>
                 </nav>
                 @if ($comments->isEmpty())

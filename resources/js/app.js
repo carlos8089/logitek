@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+const { data } = require('jquery');
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -27,11 +29,23 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
-    el: '#app',
+new Vue({
+    el: '#vue',
     data: {
-        message: 'hello gro.. tu avances bien?'
+        message: 'bien?'
+    },
+    created: function(){
+        console.log('mo, message de bienvenue est : ' + this.message)
     }
+})
+
+var obj = {
+    foo: 'lol'
+}
+
+new Vue({
+    el: '#test',
+    data: obj,
 })
 
 

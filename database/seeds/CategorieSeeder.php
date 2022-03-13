@@ -1,5 +1,6 @@
 <?php
 
+use App\Categorie;
 use Illuminate\Database\Seeder;
 class CategorieSeeder extends Seeder
 {
@@ -15,6 +16,9 @@ class CategorieSeeder extends Seeder
             'name' => Str::random(10)
         ]);
         */
-        factory(App\Categorie::class, 10)->create();
+        Categorie::factory()
+                        ->count(10)
+                        ->create();
+        //factory(App\Categorie::class, 10)->create();
     }
 }

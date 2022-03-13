@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Categorie;
+use App\Comment;
 use App\Platform;
 use App\Solution;
 use App\Subcategorie;
 use App\User;
+use DateInterval;
+use DatePeriod;
+use DateTime;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +29,8 @@ class SolutionController extends Controller
         $this->middleware('auth', ['except'=>['index', 'show']]);
     }
 
-    public static function getid(){
+    public static function getid()
+    {
         $uid = Auth::id();
         return $uid;
     }
@@ -36,7 +41,6 @@ class SolutionController extends Controller
      */
     public function index()
     {
-        //
         $solutions = Solution::where('user_id', $this->getid())->paginate(20);
         return view('boSolutionIndex', compact('solutions'));
     }
@@ -107,8 +111,9 @@ class SolutionController extends Controller
         $sol = $solutions->first();
         //unserialize screenshots paths
         $screens = unserialize($sol->screens, ['allowed_classes' => false]);
+        $stats = $this->comments_stats(Solution::find($solution->id));
 
-        return view('boSolutionShow', compact('solutions','users', 'screens'));
+        return view('boSolutionShow', compact('solutions','users', 'screens'))->with('commentstats', $stats);
     }
 
     /**
@@ -150,5 +155,64 @@ class SolutionController extends Controller
         $sol->delete();
 
         return redirect()->route('solutions.index');
+    }
+
+    public function comments_stats(Solution $solution)
+    {
+        $stats = collect();
+
+        //number of comments
+        $nb = $solution->comments()->count();
+        $stats->push(['total', $nb]);
+
+        //dates
+        $created = new DateTime($solution->created_at->format('Y-m')) ;
+        $today = new DateTime(today()->format('Y-m'));
+        //echo $today->format('Y-m');
+        $stats->push(['byMonth', $this->commentsStatByYear(new DateTime('2021-11-01'), new DateTime('2025-11-01'), $solution)]);
+
+        return $stats;
+    }
+
+    public function commentsStatByDay($start, $end, Solution $solution)
+    {
+        $commentsByDay = collect();
+        $intv = new DateInterval('P1D');
+        $dateRange = new DatePeriod($start, $intv, $end);
+
+        foreach ($dateRange as $date) {
+            $comments_date = Comment::whereDate('created_at', $date->format('Y-m-d'))->where('solution_id', $solution->id)->count();
+            $commentsByDay->push(['date', $date->format('Y-m-d')], ['number', $comments_date]);
+        }
+
+        return $commentsByDay;
+    }
+
+    public function commentsStatByMonth($start, $end, Solution $solution)
+    {
+        $commentsByMonth = collect();
+        $intv = new DateInterval('P1M');
+        $dateRange = new DatePeriod($start, $intv, $end);
+
+        foreach ($dateRange as $date) {
+            $comments_date = Comment::whereMonth('created_at', $date->format('m'))->where('solution_id', $solution->id)->count();
+            $commentsByMonth->push(['month', $date->format('Y-m')], ['number', $comments_date]);
+        }
+
+        return $commentsByMonth;
+    }
+
+    public function commentsStatByYear($start, $end, SOlution $solution)
+    {
+        $commentsByYear = collect();
+        $intv = new DateInterval('P1Y');
+        $dateRange = new DatePeriod($start, $intv, $end);
+
+        foreach ($dateRange as $date) {
+            $comments_date = Comment::whereYear('created_at', $date->format('Y'))->where('solution_id', $solution->id)->count();
+            $commentsByYear->push(['month', $date->format('Y')], ['number', $comments_date]);
+        }
+
+        return $commentsByYear;
     }
 }

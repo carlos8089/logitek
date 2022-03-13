@@ -17,22 +17,21 @@
             </div>
         @endif
         <div class="container-fluid">
-            <form action="{{ route('solutions.store') }}" method="POST" id="sol-create-form" enctype="multipart/form-data">
-                @csrf
+            <x-form action="{{ route('solutions.store') }}" id="sol-create-form" has-files>
                 <div class="alert alert-dark">
                     {{ __('General informations')}}
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="">{{ __('Name') }}</label>
+                        <x-label for="name"/>
                     </div>
                     <div class="col-md-7">
-                        <input class="form-control" type="text" name="name" id="">
+                        <x-input class="form-control"  name="name" id=""/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="">{{ __('Category') }}</label>
+                        <x-label for="category"/>
                     </div>
                     <div class="col-md-7">
                         <select class="form-control" name="category" id="">
@@ -44,7 +43,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="">{{ __('Sub-category') }}</label>
+                        <x-label for="subcategory"/>
                     </div>
                     <div class="col-md-7">
                         <select class="form-control" name="subcategory" id="">
@@ -56,7 +55,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="">{{ __('Operating platform') }}</label>
+                        <x-label for="platform"/>
                     </div>
                     <div class="col-md-7">
                         <select name="platform" id="" class="form-control">
@@ -68,34 +67,34 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="">{{ __('Mention a specific OS') }} <span>{{ __('(optional)')}}</span></label>
+                        <x-label for="operating_system"/> <span>{{ __('(Optional)') }}</span>
                     </div>
                     <div class="col-md-7">
-                        <input class="form-control" type="text" name="os" id="" placeholder="Use comma to separate element if there are several. (ex: Linux, Windows, Solaris...)">
+                        <x-input class="form-control" name="os" id="" placeholder="Use comma to separate element if there are several. (ex: Linux, Windows, Solaris...)"/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="">{{ __('Description') }}</label>
+                        <x-label for="description"/>
                     </div>
                     <div class="col-md-7">
-                        <textarea class="form-control" name="desc" id="" cols="30" rows="10"></textarea>
+                        <x-textarea class="form-control" name="desc" id="" cols="30" rows="10"/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="">{{ __('Screenshots') }}</label>
+                        <x-label for="screenshots"/>
                     </div>
                     <div class="col-md-7">
-                        <input class="btn btn-primary" type="file" name="screens[]" id="" multiple>
+                        <x-input class="btn btn-primary" type="file" name="screens[]" id="" multiple/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="">{{ __('Site') }}</label>
+                        <x-label for="site"/>
                     </div>
                     <div class="col-md-7">
-                        <input class="form-control" type="url" name="site" id="" placeholder="https://www.mysite.com">
+                        <x-input class="form-control" type="url" name="site" id="" placeholder="https://www.mysite.com"/>
                     </div>
                 </div>
                 <div class="alert alert-dark">
@@ -103,7 +102,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        {{ __('Type')}}
+                        <x-label for="type"/>
                     </div>
                     <div class="col-md-7">
                         <select class="form-control" name="sellable" id="tradeType">
@@ -114,7 +113,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="">{{ __('Currency') }}</label>
+                        <x-label for="currency"/>
                     </div>
                     <div class="col-md-7">
                         <select class="form-control" name="currency" id="currencies" disabled>
@@ -128,10 +127,10 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="">{{ __('Amount') }}</label>
+                        <x-label for="amount"/>
                     </div>
                     <div class="col-md-7">
-                        <input class="form-control" type="number" name="amount" id="amount" disabled>
+                        <x-input class="form-control" type="number" name="amount" id="amount" disabled/>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
@@ -139,7 +138,7 @@
                         <input class="btn btn-success me-2" id="solCreateBtn" type="submit" value="Add Now" style="width: 100%">
                     </div>
                 </div>
-            </form>
+            </x-form>
         </div>
     </div>
 </div>

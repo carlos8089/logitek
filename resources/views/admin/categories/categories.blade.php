@@ -15,8 +15,17 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table">
-                                @foreach ($categories as $categorie)
+                            <table class="table table-stripped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($categories as $categorie)
                                     <tr>
                                         <th>{{ $categorie->id}}</th>
                                         <th>{{ $categorie->name}}</th>
@@ -30,6 +39,7 @@
                                         </th>
                                     </tr>
                                 @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -59,5 +69,4 @@
             </div>
         </div>
     </div>
-
 @endsection

@@ -1,12 +1,20 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Message;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Message::class, function (Faker $faker) {
-    return [
-        //
-    ];
-});
+class MessageFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+
+        ];
+    }
+}

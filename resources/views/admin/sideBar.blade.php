@@ -37,6 +37,11 @@
                         <a class="nav-link" href="{{ url('/admin/messages') }} ">{{ __('Messages') }}</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <div>
+                        <a class="nav-link" href="{{ url('/admin/countries') }} ">{{ __('Countries') }}</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

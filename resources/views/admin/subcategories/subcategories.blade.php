@@ -16,11 +16,13 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th>{{ __('ID') }}</th>
                                     <th>{{ __('Name') }}</th>
                                     <th>{{ __('Category') }}</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>

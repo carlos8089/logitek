@@ -65,7 +65,6 @@
                                 <a class="dropdown-item" href="{{ url('/admin/messages') }}" role="button" class="btn btn-primary"><span>{{ __('View all') }}</span></a>
                             </div>
                         </li>
-
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

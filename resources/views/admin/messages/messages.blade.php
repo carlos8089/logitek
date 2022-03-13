@@ -11,11 +11,12 @@
         <div class="card">
             <div class="table-responsive">
                 <table class="table table-striped">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th>{{ __('User') }}</th>
                             <th>{{ __('Object') }}</th>
                             <th>{{ __('Date') }}</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

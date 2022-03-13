@@ -40,20 +40,45 @@ class AdminController extends Controller
 
     public function solutions(){
         $total = Solution::all()->count();
-        $countCategory = [];
         $categories = Categorie::all();
-        //echo $categories->count();
-        foreach ($categories as $category) {
-            array_push($countCategory, [$category->name => $this->solByCategory($category->name)]);
-        }
-        //$counts = implode(",", $countCategory);
-        print_r($countCategory);
+        $solutionsByCat = $this->solByCategory();
+        $solutionsBySub = $this->solBySubcategory();
+        $solutionsByPlat = $this->solByPlatform();
 
-        //return view('admin.solutions')->with('totalSolution',$total);
+        return view('admin.solutions', compact('categories'))->with('totalSolution',$total)
+                                    ->with('byCat', $solutionsByCat)
+                                    ->with('bySub', $solutionsBySub)
+                                    ->with('byPlat', $solutionsByPlat);
     }
 
-    public function solByCategory($category){
-        $solutions = Solution::where('category', $category)->get();
-        return $solutions->count();
+    public function solByCategory(){
+        $categories = Categorie::all();
+        $countCategory = '';
+        $solutionsByCat = collect([]);
+        foreach ($categories as $category) {
+            $countCategory = Solution::where('category', $category->name)->count();
+            $solutionsByCat->push(['name'=>$category->name, 'number'=>$countCategory]);
+        }
+        return $solutionsByCat;
+    }
+    public function solBySubcategory(){
+        $subcategories = Subcategorie::all();
+        $countSub = '';
+        $solutionBySub = collect([]);
+        foreach ($subcategories as $sub) {
+            $countSub = Solution::where('subcategory', $sub->name)->count();
+            $solutionBySub->push(['name'=>$sub->name, 'number'=>$countSub]);
+        }
+        return $solutionBySub;
+    }
+    public function solByPlatform(){
+        $platforms = Platform::all();
+        $countPlat = '';
+        $solutionByPlat = collect([]);
+        foreach ($platforms as $plat) {
+            $countPlat = Solution::where('platform', $plat->name)->count();
+            $solutionByPlat->push(['name'=>$plat->name, 'number'=>$countPlat]);
+        }
+        return $solutionByPlat;
     }
 }

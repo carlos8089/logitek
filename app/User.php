@@ -52,4 +52,8 @@ class User extends Authenticatable
         return $this->hasMany(Message::class);
     }
 
+    //retrieve user's country
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\SolutionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -37,6 +38,7 @@ Route::resource('categories', CategorieController::class);
 Route::resource('subcategories', SubcategorieController::class);
 Route::resource('platforms', PlatformController::class);
 Route::resource('messages', MessageController::class);
+Route::resource('countries', CountryController::class);
 
 Route::get('/admin', [AdminController::class, 'index'])->name('Admin');
 Route::get('/admin/solutions', [AdminController::class, 'solutions'])->name('admin.solutions');
@@ -45,14 +47,21 @@ Route::get('/admin/categories', 'CategorieController@index');
 Route::get('/admin/subcategories', 'SubcategorieController@index');
 Route::get('/admin/platforms', 'PlatformController@index');
 Route::get('/admin/messages', 'MessageController@index');
-
+Route::get('/admin/countries', 'CountryController@index');
+//test route for admin pages
+Route::get('/testadmin/countries', function(){
+    return view('admin.countries');
+});
 
 //Main app routes
 Route::resource('solutions', 'SolutionController');
 Route::resource('comments', CommentController::class);
 Route::get('/','StaticController@accueil');
+Route::get('/filter',[StaticController::class, 'filter'])->name('filter');
+Route::get('/adfilter',[StaticController::class, 'advancedfilter'])->name('advancedfilter');
 Route::get('/sol/{sol}', [StaticController::class,'solution'])->name('staticsolution');
 Route::get('/search', [StaticController::class, 'search'])->name('staticsearch');
+Route::get('/publisher/{user}', [StaticController::class, 'user'])->name('showpublisher');
 Route::get('/logn', function(){
     return view('logn');
 });

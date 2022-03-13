@@ -1,10 +1,9 @@
 @extends('layouts.app')
-
 @section('content')
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-3">
         <div class="row justify-content-center">
             <div class="col-md-2" style="#background-color: green">
-                <div class="card">
+                <div class="card" id="menu">
                     <div class="card-header">{{ __('Menu') }}</div>
                     <div class="card-body">
                         <ul class="nav flex-column">
@@ -26,7 +25,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card">
+                <div class="">
                     <a href="{{ url('/') }}" class="btn btn-primary" style="width: 100%">{{ __('Go to Library') }}</a>
                 </div>
             </div>
@@ -37,7 +36,8 @@
                         {{ $message }}
                     </div>
                 @endif
-                <div class="alert alert-success" id="notif-success" hidden=true>lol</div>
+                <div class="alert alert-success" id="notif-success">lol</div>
+                <example-component>lol</example-component>
                 @yield('boContent')
             </div>
         </div>

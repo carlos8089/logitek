@@ -1,5 +1,6 @@
 <?php
 
+use Database\Seeders\CountrySeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,13 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 15)->create();
+        //factory(App\User::class, 15)->create();
         $this->call([
             CategorieSeeder::class,
             SubcategorieSeeder::class,
             PlatformSeeder::class,
             SolutionSeeder::class,
-            CommentSeeder::class
+            CommentSeeder::class,
+            CountrySeeder::class
         ]);
     }
 }

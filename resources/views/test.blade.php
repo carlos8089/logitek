@@ -1,10 +1,15 @@
 @extends('layouts.app')
 @section('content')
-    <div>
-        <form action="{{ route('uploads') }}" method="post" enctype="multipart/form-data">
-            @csrf
-            <input type="file" name="screen[]" id="screen" multiple="yes">
-            <input type="submit" value="Envoyer">
-        </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <x-form action=" {{ route('staticuser') }} " method="get">
+                        <x-input class="form-control" name="user" />
+                        <button class="form-control btn btn-info" type="submit">Clique ici</button>
+                    </x-form>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

@@ -27,7 +27,7 @@ Frameork routes
 */
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('backoffhome');
 
 /*
 Wroten routes
@@ -56,12 +56,13 @@ Route::get('/testadmin/countries', function(){
 //Main app routes
 Route::resource('solutions', 'SolutionController');
 Route::resource('comments', CommentController::class);
-Route::get('/','StaticController@accueil');
-Route::get('/filter',[StaticController::class, 'filter'])->name('filter');
+Route::get('/','StaticController@accueil')->name('home');
+Route::get('/directory', [StaticController::class, 'marketplaceIndex'])->name('marketplace');
+Route::get('/directory/filter',[StaticController::class, 'filter'])->name('filter');
 Route::get('/adfilter',[StaticController::class, 'advancedfilter'])->name('advancedfilter');
-Route::get('/sol/{sol}', [StaticController::class,'solution'])->name('staticsolution');
-Route::get('/search', [StaticController::class, 'search'])->name('staticsearch');
-Route::get('/publisher/{user}', [StaticController::class, 'user'])->name('showpublisher');
+Route::get('/directory/search', [StaticController::class, 'search'])->name('staticsearch');
+Route::get('/directory/{sol}', [StaticController::class,'solution'])->name('staticsolution');
+Route::get('/directory/publisher/{user}', [StaticController::class, 'user'])->name('showpublisher');
 Route::get('/logn', function(){
     return view('logn');
 });
@@ -76,9 +77,9 @@ Route::get('/projects', function(){
     return view('projects');
 });
 
-Route::get('sol/categories/{name}', [StaticController::class, 'interceptCatName'])->name('fcat');
-Route::get('sol/subcategories/{name}', [StaticController::class, 'interceptSubcatName'])->name('fsubcat');
-Route::get('sol/platforms/{name}', [StaticController::class, 'interceptPlatName'])->name('fplatform');
+Route::get('directory/categories/{name}', [StaticController::class, 'interceptCatName'])->name('fcat');
+Route::get('directory/categories/subcategories/{name}', [StaticController::class, 'interceptSubcatName'])->name('fsubcat');
+Route::get('diretcory/platforms/{name}', [StaticController::class, 'interceptPlatName'])->name('fplatform');
 Route::post('/store', [StaticController::class, 'storeFiles'])->name('uploads');
 Route::view('/test', 'test');
 

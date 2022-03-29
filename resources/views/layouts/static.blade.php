@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('left-nav-menu')
     <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('marketplace') }}" role="button">{{ __('Directory') }}</a>
+        </li>
         <li class="nav-item dropdown">
             <a id="about-dropdown" class="nav-link dropdown-toggle"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 {{ __('About') }}
@@ -81,7 +84,7 @@
                 </span>
                 <div class="dropdown-menu">
                     @foreach ($subcategories as $subcategorie)
-                        <a class="btn" href="{{ route('fsubcat', ['name'=>$subcategorie->name]) }}"><span class="badge badge-primary badge-pill">{{ $subcategorie->name }}</span></a>
+                        <a class="dropdown-item" href="{{ route('fsubcat', ['name'=>$subcategorie->name]) }}"><span class="">{{ $subcategorie->name }}</span></a>
                     @endforeach
                 </div>
             </div>
@@ -92,7 +95,7 @@
                 </span>
                 <div class="dropdown-menu">
                     @foreach ($platforms as $platform)
-                        <a class="btn" href="{{ route('fplatform', ['name'=>$platform->name]) }}"><span class="badge badge-primary badge-pill">{{ $platform->name }}</span></a>
+                        <a class="dropdown-item" href="{{ route('fplatform', ['name'=>$platform->name]) }}"><span class="">{{ $platform->name }}</span></a>
                     @endforeach
                 </div>
             </div>

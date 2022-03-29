@@ -1,0 +1,38 @@
+section{
+    padding-bottom: 1%;
+    background-color: rgb(240, 240, 240);
+}
+section, #explore-marketplace {
+    padding-block-end: 5%;
+}
+
+#header{
+    padding-bottom: 1%;
+}
+#explore-marketplace{
+    background-color: white;
+}
+#contribution{
+    background-image: url(https://ouch-cdn2.icons8.com/doT4Sk5p_XufgRS4DXh0T2YnzbqmmAtr0AdjyTmVR_c/rs:fit:1368:912/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvODk1/L2MyMmQwODdjLTkx/ODQtNGMxNC05ZDJh/LTdmNWRhNGNlNDM0/YS5zdmc.png);
+    background-position: left;
+    background-repeat: repeat;
+    padding: auto;
+}
+#contribute{
+    padding: 3% 0% 35% 5%;
+}
+#contribute .lead{
+    font-size: 1.2em;
+}
+
+.value-card{
+    padding: 5% 5% 5% 5%;
+    margin: 0.5% 2% 0.5% 2%;
+    display: grid;
+    justify-items: center;
+    border: solid grey 1px;
+}
+
+.mr-auto .nav-item{
+    padding-inline-end: 15%;
+}

@@ -70,7 +70,10 @@
                         <x-label for="operating_system"/> <span>{{ __('(Optional)') }}</span>
                     </div>
                     <div class="col-md-7">
-                        <x-input class="form-control" name="os" id="" placeholder="Use comma to separate element if there are several. (ex: Linux, Windows, Solaris...)"/>
+                        <x-input class="form-control" name="os" id="" placeholder=""/>
+                        <small class="form-text- text-muted">
+                            {{ __('Use comma to separate element if there are several. (ex: Linux, Windows, Solaris...)') }}
+                        </small>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -94,7 +97,10 @@
                         <x-label for="site"/>
                     </div>
                     <div class="col-md-7">
-                        <x-input class="form-control" type="url" name="site" id="" placeholder="https://www.mysite.com"/>
+                        <x-input class="form-control" type="url" name="site" id="" placeholder=""/>
+                        <small class="form-text text-muted">
+                            {{ _('Example : https://www.mysite.com') }}
+                        </small>
                     </div>
                 </div>
                 <div class="alert alert-dark">

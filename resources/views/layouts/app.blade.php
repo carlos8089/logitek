@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -38,7 +38,7 @@
     <body>
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
-                <div class="container">
+                <div class="container-fluid">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
@@ -79,7 +79,7 @@
                                             @csrf
                                         </form>
 
-                                        <a class="dropdown-item" href="{{ route('home') }}">Home</a>
+                                        <a class="dropdown-item" href="{{ route('backoffhome') }}">Home</a>
                                     </div>
                                 </li>
                             @endguest
@@ -104,8 +104,9 @@
                 @yield('content')
             </div>
         </div>
-        <footer class="bg-dark text-default">
+        <footer class="">
             <style>
+                /*
                 footer {
                 position: relative;
                 left: 0;
@@ -114,13 +115,19 @@
                 overflow: auto;
                 color: rgb(218, 218, 218);
                 margin-top: 10%;
+                */
             }
             </style>
             @yield('footer')
-            <div style="text-align: center">
-                <span>{{ __('copyright logitek@2021') }}</span>
-            </div>
+            <nav class="navbar navbar-dark bg-dark sticky-bottom">
+                <span class="navbar-brand mb-0 h1">{{ __('@ 2022 Logitek') }}</span>
+                <ul class="navbar-nav mr-auto">
 
+                </ul>
+                <ul class="navbar-nav ml-auto">
+
+                </ul>
+            </nav>
         </footer>
         @bukScripts
     </body>

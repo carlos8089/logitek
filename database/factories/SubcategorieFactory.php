@@ -1,13 +1,22 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Subcategorie;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Subcategorie::class, function (Faker $faker) {
-    return [
-        'categorie_id'=>rand(1,9),
-        'name'=>$faker->name,
-    ];
-});
+class SubcategorieFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            //
+            'categorie_id'=>rand(1,9),
+            'name'=>$this->faker->name,
+        ];
+    }
+}

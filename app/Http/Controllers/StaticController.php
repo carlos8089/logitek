@@ -12,15 +12,30 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Providers\AppServiceProvider;
+use SebastianBergmann\Environment\Console;
+
 class StaticController extends Controller
 {
     public function accueil(){
+        /*
         $solutions = Solution::paginate(12);
         $categories = Categorie::all();
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
         $count = Solution::all()->count();
         return view('accueil', compact('solutions', 'categories', 'subcategories', 'platforms'))->with('count', $count);
+        */
+        $categories = Categorie::all();
+        return view('accueil');
+    }
+
+    public function marketplaceIndex(){
+        $solutions = Solution::paginate(12);
+        $categories = Categorie::all();
+        $subcategories = Subcategorie::all();
+        $platforms = Platform::all();
+        $count = Solution::all()->count();
+        return view('directory', compact('solutions', 'categories', 'subcategories', 'platforms'))->with('count', $count);
     }
 
     public function solution($solution){
@@ -130,9 +145,14 @@ class StaticController extends Controller
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
         $cat = Categorie::where('id', $category)->first();
+        $subs = Subcategorie::where('categorie_id', $cat->id)->get();
+        //echo $subs->first()->name;
+
         $fsols = Solution::where('category', $cat->name)->paginate(18);
-        return view('filter', compact('fsols', 'categories', 'subcategories', 'platforms'))->with('type', 'category')
+        $count = Solution::where('category', $cat->name)->count();
+        return view('category', compact('cat','fsols', 'categories', 'subcategories', 'platforms', 'subs'))->with('count', $count)
                                                                                             ->with('category',$cat->name);
+
     }
 
     public function fsub($subcategory){
@@ -141,8 +161,10 @@ class StaticController extends Controller
         $platforms = Platform::all();
         $sub = Subcategorie::where('id', $subcategory)->first();
         $fsols = Solution::where('subcategory', $sub->name)->paginate(18);
-        return view('filter', compact('fsols', 'categories', 'subcategories', 'platforms'))->with('type','subcategory')
-                                                ->with('subcategory', $sub->name);
+        $count = Solution::where('subcategory', $sub->name)->count();
+        return view('subcategory', compact('sub','fsols', 'categories', 'subcategories', 'platforms'))->with('type','subcategory')
+                                                                                                        ->with('count', $count)
+                                                                                                        ->with('subcategory', $sub->name);
     }
 
     public function fplatform($platform){

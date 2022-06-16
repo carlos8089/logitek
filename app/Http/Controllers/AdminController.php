@@ -18,7 +18,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-
+        //$this->middleware('auth');
     }
     /**
      * Show the application dashboard.
@@ -56,7 +56,7 @@ class AdminController extends Controller
         $countCategory = '';
         $solutionsByCat = collect([]);
         foreach ($categories as $category) {
-            $countCategory = Solution::where('category', $category->name)->count();
+            $countCategory = Solution::where('categorie_id', $category->id)->count();
             $solutionsByCat->push(['name'=>$category->name, 'number'=>$countCategory]);
         }
         return $solutionsByCat;
@@ -66,7 +66,7 @@ class AdminController extends Controller
         $countSub = '';
         $solutionBySub = collect([]);
         foreach ($subcategories as $sub) {
-            $countSub = Solution::where('subcategory', $sub->name)->count();
+            $countSub = Solution::where('subcategorie_id', $sub->id)->count();
             $solutionBySub->push(['name'=>$sub->name, 'number'=>$countSub]);
         }
         return $solutionBySub;
@@ -76,7 +76,7 @@ class AdminController extends Controller
         $countPlat = '';
         $solutionByPlat = collect([]);
         foreach ($platforms as $plat) {
-            $countPlat = Solution::where('platform', $plat->name)->count();
+            $countPlat = Solution::where('platform_id', $plat->id)->count();
             $solutionByPlat->push(['name'=>$plat->name, 'number'=>$countPlat]);
         }
         return $solutionByPlat;

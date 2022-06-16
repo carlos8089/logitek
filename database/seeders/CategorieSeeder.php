@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Categorie;
 use Illuminate\Database\Seeder;
+use App\Categorie;
+use Illuminate\Support\Facades\DB;
+
 class CategorieSeeder extends Seeder
 {
     /**
@@ -13,14 +15,23 @@ class CategorieSeeder extends Seeder
      */
     public function run()
     {
-        /*
         DB::table('categories')->insert([
-            'name' => Str::random(10)
+            'name' => 'Education'
         ]);
-        */
-        Categorie::factory()
-                        ->count(10)
-                        ->create();
-        //factory(App\Categorie::class, 10)->create();
+        DB::table('categories')->insert([
+            'name' => 'Entertainment'
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Games'
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Health Care'
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Life Style'
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Productivity'
+        ]);
     }
 }

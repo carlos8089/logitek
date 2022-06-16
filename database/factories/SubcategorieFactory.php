@@ -14,7 +14,6 @@ class SubcategorieFactory extends Factory
     public function definition()
     {
         return [
-            //
             'categorie_id'=>rand(1,9),
             'name'=>$this->faker->name,
         ];

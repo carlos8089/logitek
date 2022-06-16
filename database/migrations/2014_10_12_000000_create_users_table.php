@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('category')->default('single');
             $table->string('name');
-            $table->string('country')->default('Togo');
+            $table->foreignId('country_id');
             $table->string('tel')->default('');
             $table->string('website')->default('');
             $table->string('email')->unique();

@@ -4,7 +4,7 @@ use App\Http\Controllers\SolutionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CountryController;
+//use App\Http\Controllers\OsController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -32,11 +32,12 @@ Route::get('/home', 'HomeController@index')->name('backoffhome');
 /*
 Wroten routes
 */
-//Admin routes
+//Admin routesRoute::resource('users', UserController::class);
 Route::resource('users', UserController::class);
 Route::resource('categories', CategorieController::class);
 Route::resource('subcategories', SubcategorieController::class);
 Route::resource('platforms', PlatformController::class);
+Route::resource('os', OsController::class);
 Route::resource('messages', MessageController::class);
 Route::resource('countries', CountryController::class);
 
@@ -46,6 +47,7 @@ Route::get('/admin/users', 'UserController@index');
 Route::get('/admin/categories', 'CategorieController@index');
 Route::get('/admin/subcategories', 'SubcategorieController@index');
 Route::get('/admin/platforms', 'PlatformController@index');
+Route::get('/admin/os', 'OsController@index');
 Route::get('/admin/messages', 'MessageController@index');
 Route::get('/admin/countries', 'CountryController@index');
 //test route for admin pages
@@ -59,7 +61,7 @@ Route::resource('comments', CommentController::class);
 Route::get('/','StaticController@accueil')->name('home');
 Route::get('/directory', [StaticController::class, 'marketplaceIndex'])->name('marketplace');
 Route::get('/directory/filter',[StaticController::class, 'filter'])->name('filter');
-Route::get('/adfilter',[StaticController::class, 'advancedfilter'])->name('advancedfilter');
+Route::get($request->fullUrl()+'/adfilter',[StaticController::class, 'advancedfilter'])->name('advancedfilter');
 Route::get('/directory/search', [StaticController::class, 'search'])->name('staticsearch');
 Route::get('/directory/{sol}', [StaticController::class,'solution'])->name('staticsolution');
 Route::get('/directory/publisher/{user}', [StaticController::class, 'user'])->name('showpublisher');

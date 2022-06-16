@@ -2,12 +2,12 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Categorie;
 
 class Subcategorie extends Model
 {
-    //
+    use HasFactory;
     /**
      *
      * @var array
@@ -15,6 +15,10 @@ class Subcategorie extends Model
     protected $fillable = ['categorie_id', 'name'];
 
     public function categorie(){
-        return $this->belongsTo('App\Categorie', 'categorie_id');
+        return $this->belongsTo(Categorie::class);
+    }
+
+    public function solutions(){
+        return $this->hasMany(Solution::class);
     }
 }

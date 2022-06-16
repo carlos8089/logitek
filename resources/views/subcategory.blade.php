@@ -2,13 +2,6 @@
 @section('main')
     <div class="container-lg-fluid p-responsive clearfix" id="directory-main">
         {{ Breadcrumbs::render('subcategory', $sub) }}
-        <div class="container">
-            <div class="alert">
-                <h3 class="display-5 text-center font-weight-bold">
-                    {{ __('Category : ') }} {{ $subcategory }}
-                </h3>
-            </div>
-        </div>
         <div class="col-9 float-lg-right" id="search-area">
             <x-form class="form-row" action="{{ route('staticsearch') }}" method="get" style="width: 70%">
                 <div class="col-10">
@@ -22,11 +15,11 @@
         </div>
         <ul class="nav flex-column float-lg-left col-3 shadow-sm" id="side-navigation">
             <div class="" style="padding: 0% 0% 0% 4%">
-                <h4 class="font-weight-bold">{{ __('Categories') }}</h4>
+                <h4 class="font-weight-bold">{{ __('Other Sub-categories') }}</h4>
             </div>
-            @foreach ($categories as $cat)
+            @foreach ($subcategories as $subcat)
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('fcat', ['name'=> $cat->name]) }}" role="button">{{$cat->name}}</a>
+                    <a class="nav-link" href="{{ route('fsubcat', ['name'=> $subcat->name]) }}" role="button">{{$subcat->name}}</a>
                 </li>
             @endforeach
         </ul>
@@ -70,9 +63,7 @@
                         </div>
                     </div>
                     <div>
-                        <span class="badge badge-primary badge-pill">{{ $fsol->category }}</span>
-                        <span class="badge badge-primary badge-pill">{{ $fsol->subcategory }}</span>
-                        <span class="badge badge-primary badge-pill">{{ $fsol->platform }}</span>
+                        <span class="badge badge-primary badge-pill">{{ $fsol->platform->name }}</span>
                     </div>
                 </div>
             @endforeach

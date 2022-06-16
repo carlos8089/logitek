@@ -12,7 +12,12 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            @foreach ($countries as $country)
+                                <tr>
+                                    <th>{{ $country->name }}</th>
+                                    <th>{{ rand(1,10) }}</th>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

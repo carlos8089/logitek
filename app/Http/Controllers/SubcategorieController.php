@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Categorie;
+use App\Http\Requests\StoreSubcategorieRequest;
+use App\Http\Requests\UpdateSubcategorieRequest;
 use App\Subcategorie;
-use Illuminate\Http\Request;
+use App\Categorie;
 
 class SubcategorieController extends Controller
 {
@@ -43,29 +44,26 @@ class SubcategorieController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreSubcategorieRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSubcategorieRequest $request)
     {
-        //echo Categorie::where('name',$request->category)->first()->id;
-
         $sub = new Subcategorie();
         $sub->categorie_id = Categorie::where('name',$request->category)->first()->id;
         $sub->name = $request->name;
         $sub->save();
 
         return redirect()->route('subcategories.index');
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Subcategorie  $subcategory
+     * @param  \App\Subcategorie  $subcategorie
      * @return \Illuminate\Http\Response
      */
-    public function show(Subcategorie $subcategory)
+    public function show(Subcategorie $subcategorie)
     {
         //
     }
@@ -73,10 +71,10 @@ class SubcategorieController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Subcategorie  $subcategory
+     * @param  \App\Subcategorie  $subcategorie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subcategorie $subcategory)
+    public function edit(Subcategorie $subcategorie)
     {
         //
     }
@@ -84,11 +82,11 @@ class SubcategorieController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Subcategorie  $subcategory
+     * @param  \App\Http\Requests\UpdateSubcategorieRequest  $request
+     * @param  \App\Subcategorie  $subcategorie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subcategorie $subcategory)
+    public function update(UpdateSubcategorieRequest $request, Subcategorie $subcategorie)
     {
         //
     }
@@ -96,7 +94,7 @@ class SubcategorieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Subcategorie  $subcategory
+     * @param  \App\Subcategorie  $subcategorie
      * @return \Illuminate\Http\Response
      */
     public function destroy(Subcategorie $subcategory)

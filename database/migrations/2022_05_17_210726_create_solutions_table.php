@@ -1,5 +1,6 @@
 <?php
 
+use App\Platform;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,10 +18,10 @@ class CreateSolutionsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('name');
-            $table->string('category');
-            $table->string('subcategory');
-            $table->string('platform');
-            $table->string('os');
+            $table->foreignId('categorie_id');
+            $table->foreignId('subcategorie_id');
+            $table->foreignId('platform_id');
+            $table->foreignId('os_id');
             $table->text('desc');
             $table->string('screens');
             $table->string('site');

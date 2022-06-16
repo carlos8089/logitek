@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Solution;
 use Illuminate\Database\Seeder;
+
 class SolutionSeeder extends Seeder
 {
     /**
@@ -12,6 +14,8 @@ class SolutionSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Solution::class, 500)->create();
+        Solution::factory()
+                        ->count(323)
+                        ->create();
     }
 }

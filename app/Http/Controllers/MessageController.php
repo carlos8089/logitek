@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMessageRequest;
+use App\Http\Requests\UpdateMessageRequest;
 use App\Message;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
@@ -16,14 +17,6 @@ class MessageController extends Controller
     public function index()
     {
         //Have to paginate sorted collection
-        /*
-        $msg = Message::paginate(2);
-        $messages = $msg->sortByDesc('created_at', SORT_DESC);
-        */
-        /*
-        $msg = Message::all()->sortByDesc('created_at', SORT_DESC);
-        $messages = $msg->paginate(perPage: 10);
-        */
         $messages = Message::paginate(10);
 
         return view('admin.messages.messages', compact('messages'));
@@ -42,10 +35,10 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreMessageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMessageRequest $request)
     {
         $msg = new Message();
         $msg->user_id = Auth::user()->id;
@@ -84,11 +77,11 @@ class MessageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateMessageRequest  $request
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Message $message)
+    public function update(UpdateMessageRequest $request, Message $message)
     {
         //
     }

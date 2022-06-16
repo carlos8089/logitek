@@ -24,6 +24,11 @@
                 </li>
                 <li class="nav-item">
                     <div>
+                        <a class="nav-link" href="{{ url('/admin/os') }} ">{{ __('OS') }}</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div>
                         <a class="nav-link" href="{{ url('/admin/users') }} ">{{ __('Users') }}</a>
                     </div>
                 </li>

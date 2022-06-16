@@ -67,10 +67,11 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <x-label for="operating_system"/> <span>{{ __('(Optional)') }}</span>
+                        <x-label for="operating_system"/>
                     </div>
                     <div class="col-md-7">
-                        <x-input class="form-control" name="os" id="" placeholder=""/>
+                        <x-input type="checkbox" class="form-inline-control rounded" name="os" id="" value="lol"/><span>Lol</span>
+                        <br>
                         <small class="form-text- text-muted">
                             {{ __('Use comma to separate element if there are several. (ex: Linux, Windows, Solaris...)') }}
                         </small>
@@ -94,17 +95,17 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <x-label for="site"/>
+                        <x-label for="site"/> <span>{{ __('(Optional)') }}</span>
                     </div>
                     <div class="col-md-7">
                         <x-input class="form-control" type="url" name="site" id="" placeholder=""/>
                         <small class="form-text text-muted">
-                            {{ _('Example : https://www.mysite.com') }}
+                            {{ _('Register your official website address | Example : https://www.mysite.com') }}
                         </small>
                     </div>
                 </div>
                 <div class="alert alert-dark">
-                    {{ __('Trading informations')}}
+                    {{ __('Fees informations')}}
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
@@ -112,8 +113,9 @@
                     </div>
                     <div class="col-md-7">
                         <select class="form-control" name="sellable" id="tradeType">
-                            <option value="0">{{ __('Free of charge')}}</option>
-                            <option value="1">{{ __('Rent product')}}</option>
+                            <option value="0">{{ __('Free of charges')}}</option>
+                            <option value="1">{{ __('Rental product')}}</option>
+                            <option value="2">{{ __('For sale')}}</option>
                         </select>
                     </div>
                 </div>
@@ -149,3 +151,6 @@
     </div>
 </div>
 @endsection
+<script>
+
+</script>

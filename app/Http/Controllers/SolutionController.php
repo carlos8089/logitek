@@ -5,16 +5,20 @@ namespace App\Http\Controllers;
 use App\Categorie;
 use App\Comment;
 use App\Platform;
-use App\Solution;
 use App\Subcategorie;
 use App\User;
 use DateInterval;
 use DatePeriod;
 use DateTime;
-use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
+use App\Http\Requests\StoreSolutionRequest;
+use App\Http\Requests\UpdateSolutionRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Solution;
+
+use Symfony\Component\Console\Input\Input;
+
 use PhpParser\Node\Stmt\Foreach_;
+
 
 class SolutionController extends Controller
 {
@@ -62,17 +66,17 @@ class SolutionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreSolutionRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-        //
+    public function store(StoreSolutionRequest $request)
+    {
         $solution = new Solution;
         $solution->user_id = $this->getid();
         $solution->name = $request->name;
-        $solution->category = $request->category;
-        $solution->subcategory = $request->subcategory;
-        $solution->platform = $request->platform;
+        $solution->categorie_id = $request->category;
+        $solution->subcategorie_id = $request->subcategory;
+        $solution->platform_id = $request->platform;
         $solution->os = $request->os;
         $solution->desc = $request->desc;
         $solution->site = $request->site;
@@ -122,7 +126,7 @@ class SolutionController extends Controller
      * @param  \App\Solution  $solution
      * @return \Illuminate\Http\Response
      */
-    public function edit($solution)
+    public function edit(Solution $solution)
     {
         return view('boSolutionEdit')->with('sol',$solution);
     }
@@ -130,11 +134,11 @@ class SolutionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateSolutionRequest  $request
      * @param  \App\Solution  $solution
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $solution)
+    public function update(UpdateSolutionRequest $request, Solution $solution)
     {
         $sol = Solution::find($solution);
         $sol->name = $request->name;
@@ -149,7 +153,7 @@ class SolutionController extends Controller
      * @param  \App\Solution  $solution
      * @return \Illuminate\Http\Response
      */
-    public function destroy($solution)
+    public function destroy(Solution $solution)
     {
         $sol = Solution::find($solution);
         $sol->delete();
@@ -202,7 +206,7 @@ class SolutionController extends Controller
         return $commentsByMonth;
     }
 
-    public function commentsStatByYear($start, $end, SOlution $solution)
+    public function commentsStatByYear($start, $end, Solution $solution)
     {
         $commentsByYear = collect();
         $intv = new DateInterval('P1Y');

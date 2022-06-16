@@ -26,7 +26,7 @@ class CategorieController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -47,10 +47,10 @@ class CategorieController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Categorie  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Categorie $category)
+    public function show($id)
     {
         //
     }
@@ -58,10 +58,10 @@ class CategorieController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Categorie  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorie $category)
+    public function edit($id)
     {
         //
     }
@@ -70,10 +70,10 @@ class CategorieController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Categorie  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorie $category)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -81,12 +81,12 @@ class CategorieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Categorie  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($category)
+    public function destroy(Categorie $category)
     {
-            $cat = Categorie::find($category);
+        $cat = Categorie::find($category);
             $cat->delete();
 
             return redirect()->route('categories.index');

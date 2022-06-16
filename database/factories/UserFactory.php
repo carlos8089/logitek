@@ -16,8 +16,10 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            //
             'name' => $this->faker->name,
+            'country_id' => rand(1,56),
+            'tel' => $this->faker->unique()->phoneNumber,
+            'website' => $this->faker->unique()->url,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => Hash::make('password'),

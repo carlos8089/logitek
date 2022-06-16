@@ -26,7 +26,7 @@ class UserController extends Controller
         $solutionByUser = collect([]);
         foreach ($users as $user) {
             $countUsers = Solution::where('user_id', $user->id)->count();
-            $solutionByUser->push(['name' => $user->name,'country'=>$user->country, 'number' => $countUsers]);
+            $solutionByUser->push(['name' => $user->name,'country'=>$user->country->name, 'number' => $countUsers]);
         }
         return $solutionByUser;
     }

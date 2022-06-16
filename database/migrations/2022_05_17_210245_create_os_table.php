@@ -1,10 +1,9 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlatformsTable extends Migration
+class CreateOsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +12,10 @@ class CreatePlatformsTable extends Migration
      */
     public function up()
     {
-        Schema::create('platforms', function (Blueprint $table) {
+        Schema::create('os', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
+            $table->foreignId('platform_id');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreatePlatformsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('platforms');
+        Schema::dropIfExists('os');
     }
 }

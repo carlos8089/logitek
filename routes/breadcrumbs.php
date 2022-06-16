@@ -37,5 +37,16 @@ Breadcrumbs::for('subcategory', function (BreadcrumbTrail $trail, Subcategorie $
     } else {
         $trail->parent('directory');
     }
-    $trail->push($subcategory->name, route('fcat', ['name'=>$subcategory->name]));
+    $trail->push($subcategory->name, route('fsubcat', ['name'=>$subcategory->name]));
+});
+
+//Home > Directory > [Category] > [Subcategory] > [Solution]
+Breadcrumbs::for('solution', function (BreadcrumbTrail $trail, Solution $solution) {
+    if ($solution->subcategorie()) {
+        $subcategory = $solution->subcategorie()->first();
+        $trail->parent('subcategory', $subcategory);
+    } else {
+        $trail->parent('category');
+    }
+    $trail->push($solution->name, route('staticsolution', ['sol'=>$solution->id]));
 });

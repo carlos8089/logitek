@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Comment;
 use Illuminate\Database\Seeder;
-
+use App\Comment;
 class CommentSeeder extends Seeder
 {
     /**
@@ -17,6 +16,5 @@ class CommentSeeder extends Seeder
         Comment::factory()
                     ->count(1000)
                     ->create();
-        //factory(App\Comment::class, 1000)->create();
     }
 }

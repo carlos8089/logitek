@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Categorie;
 use App\Comment;
+use App\Country;
+use App\Os;
 use Illuminate\Http\Request;
 use App\Solution;
 use App\Subcategorie;
@@ -12,6 +14,9 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Providers\AppServiceProvider;
+use DateTime;
+use Illuminate\Pagination\Paginator;
+use PhpParser\Node\Expr\AssignOp\Concat;
 use SebastianBergmann\Environment\Console;
 
 class StaticController extends Controller
@@ -34,8 +39,10 @@ class StaticController extends Controller
         $categories = Categorie::all();
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
+        $oses = Os::all();
+        $countries = Country::all()->sortBy('name');
         $count = Solution::all()->count();
-        return view('directory', compact('solutions', 'categories', 'subcategories', 'platforms'))->with('count', $count);
+        return view('directory', compact('solutions', 'categories', 'subcategories', 'platforms', 'oses', 'countries'))->with('count', $count);
     }
 
     public function solution($solution){
@@ -45,7 +52,7 @@ class StaticController extends Controller
         $screens = unserialize($sol->screens);
         $comments = $sol->comments->sortByDesc('created_at');
         $comments_total = $comments->count();
-        return view('solutionShow', compact('solutions','users', 'screens', 'comments'))->with('totalComment', $comments_total);
+        return view('solutionShow', compact('sol','solutions','users', 'screens', 'comments'))->with('totalComment', $comments_total);
     }
     /*
     public function searchUser(Request $request){
@@ -106,7 +113,7 @@ class StaticController extends Controller
         return view('result', compact('items', 'count', 'categories', 'subcategories', 'platforms'))->with('type', $type);
     }
 
-    //Pages de filtres
+    //Filters
 
     public function filter(Request $request){
         //$solutions = DB::table('solutions');
@@ -115,29 +122,87 @@ class StaticController extends Controller
         $platforms = Platform::all();
 
         //filter solutions
-        if (($request->category !== '') && ($request->platform !== '')) {
-            $cat = $request->category;
-            $plat = $request->platform;
-            $solutions = Solution::when($cat, function($query) use ($cat){
-                return $query->where('category', $cat);
-            })->when($plat, function ($query) use ($plat){
-                return $query->where('platform', $plat);
-            })->paginate(9)->withQueryString();
-            $filtercount = Solution::where('category',$cat)->where('platform',$plat)->count();
-        }
-        if (($request->category !== '') && ($request->platform == '')) {
-            $cat = $request->category;
-            $solutions = Solution::where('category',$cat)->paginate(15)->withQueryString();
-            $filtercount = Solution::where('category',$cat)->count();
-        }
-        if (($request->category == '') && ($request->platform !== '')) {
-            $plat = $request->platform;
-            $solutions = Solution::where('platform',$plat)->paginate(15)->withQueryString();
-            $flitercount = Solution::where('platform',$plat)->get()->count();
+        $sub = $request->subcategory;
+        $plat = $request->platform;
+        if(isset($sub)===false && isset($plat)===false){
+            return redirect(route('marketplace'));
+        }else{
+            if ((isset($sub)) && (isset($plat))) {
+                $solutions = Solution::when($sub, function($query) use ($sub){
+                    return $query->where('subcategorie_id', $sub);
+                })->when($plat, function ($query) use ($plat){
+                    return $query->where('platform_id', $plat);
+                })->paginate(9)->withQueryString();
+                $filtercount = Solution::where('subcategorie_id',$sub)->where('platform_id',$plat)->count();
+            }else{
+                if (isset($sub) && isset($plat)===false) {
+                    $solutions = Solution::where('subcategorie_id',$sub)->paginate(15)->withQueryString();
+                    $filtercount = Solution::where('subcategorie_id',$sub)->count();
+                }
+                if (isset($sub)===false && isset($plat)) {
+                    $solutions = Solution::where('platform_id',$plat)->paginate(15)->withQueryString();
+                    $flitercount = Solution::where('platform_id',$plat)->get()->count();
+                }
+            }
         }
         //$solutions->append(request()->query());
-        return view('accueil', compact('solutions', 'categories', 'subcategories', 'platforms'))->with('count', $filtercount);
+        return view('directory', compact('solutions', 'categories', 'subcategories', 'platforms'))->with('count', $filtercount);
+    }
 
+    public function advancedFilter(Request $request){
+        $categories = Categorie::all();
+        $subcategories = Subcategorie::all();
+        $platforms = Platform::all();
+        $oses = Os::all();
+        $countries = Country::all()->sortBy('name');
+
+        if(isset($request->category)){
+            $cat = Categorie::where('id', $request->category)->first();
+        }
+        if(isset($request->subcategory)){
+            $sub = Subcategorie::where('id', $request->subcategory)->first();
+        }
+        if(isset($request->platform)){
+            $plat = Platform::where('id', $request->platform)->first();
+        }
+        if(isset($request->os)){
+            $os = Os::where('id', $request->os)->first();
+        }
+        if(isset($request->country)){
+            //retreive the list of users for that country
+            $u_country = User::where('country_id', $request->country)->get();
+            //create an array off those users' id
+            $u = [];
+            foreach ($u_country as $u_c) {
+                array_push($u, $u_c->id);
+            }
+        }
+        if(isset($request->price)){
+            $price = $request->price;
+        }
+        if(isset($request->dateInf)){
+            $inf = $request->dateInf.' 00:00:00';
+            $date = new DateTime();
+            $dateInf = date_modify($date,$inf);
+        }
+        if(isset($request->dateSup)){
+            $sup = $request->dateSup.' 23:59:59';
+            //echo $sup;
+            $date = new DateTime();
+            $dateSup = date_modify($date,$sup);
+        }
+        /*
+        User::where('country_id', $country);
+        */
+        $solutions = Solution::where('categorie_id', $cat->id)
+                                ->where('subcategorie_id', $sub->id)
+                                ->where('platform_id', $plat->id)
+                                ->where('os_id', $os->id)
+                                ->whereIn('user_id', $u)
+                                ->whereBetween('created_at', [$dateInf, $dateSup])->paginate(10);
+        //$solutions->append(request()->query());
+        $filtercount = $solutions->count();
+        return view('directory', compact('solutions', 'categories', 'subcategories', 'platforms', 'oses', 'countries'))->with('count', $filtercount);
     }
 
     public function fcat($category){
@@ -148,8 +213,8 @@ class StaticController extends Controller
         $subs = Subcategorie::where('categorie_id', $cat->id)->get();
         //echo $subs->first()->name;
 
-        $fsols = Solution::where('category', $cat->name)->paginate(18);
-        $count = Solution::where('category', $cat->name)->count();
+        $fsols = Solution::where('categorie_id', $cat->id)->paginate(18);
+        $count = Solution::where('categorie_id', $cat->id)->count();
         return view('category', compact('cat','fsols', 'categories', 'subcategories', 'platforms', 'subs'))->with('count', $count)
                                                                                             ->with('category',$cat->name);
 
@@ -160,8 +225,8 @@ class StaticController extends Controller
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
         $sub = Subcategorie::where('id', $subcategory)->first();
-        $fsols = Solution::where('subcategory', $sub->name)->paginate(18);
-        $count = Solution::where('subcategory', $sub->name)->count();
+        $fsols = Solution::where('subcategorie_id', $sub->id)->paginate(18);
+        $count = Solution::where('subcategorie_id', $sub->id)->count();
         return view('subcategory', compact('sub','fsols', 'categories', 'subcategories', 'platforms'))->with('type','subcategory')
                                                                                                         ->with('count', $count)
                                                                                                         ->with('subcategory', $sub->name);
@@ -172,7 +237,7 @@ class StaticController extends Controller
         $subcategories = Subcategorie::all();
         $platforms = Platform::all();
         $plat = Platform::where('id', $platform)->first();
-        $fsols = Solution::where('platform', $plat->name)->paginate(18);
+        $fsols = Solution::where('platform_id', $plat->id)->paginate(18);
         return view('filter', compact('fsols', 'categories', 'subcategories', 'platforms'))->with('type','platform')
                                                 ->with('platforme', $plat->name);
     }

@@ -1,19 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.static-solution')
 @section('content')
     <div class="container-fluid border-bottom" style="background-color:#f6f8fa">
         <div style="padding: 3% 20%">
             <div id="search-zone" class="d-flex justify-content-center">
-                <form class="form-inline" action="{{ url('/search') }}" method="get">
-                    <div class="col-9">
-                        <input type="search" class="form-control mr-sm-2" placeholder="Rechercher un logiciel ou projet" aria-label="Search" name="stsearch" id="" style="width: 100%">
+                <x-form class="form-row" action="{{ route('staticsearch') }}" method="get" style="width: 70%">
+                    <div class="col-10">
+                        <input type="hidden" name="searchIn" id="searchIn" value="solution">
+                        <input type="search" class="form-control mr-sm-4 shadow-sm" placeholder="{{ __('Search for a software here') }}" aria-label="Search" name="stsearch" id="">
                     </div>
-                    <div class="col-3">
-                        <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+                    <div class="col-2">
+                        <button class="form-control btn btn-outline-success my-2 my-sm-0 shadow-sm" type="submit" style="width: 100%; height:100%"><strong><x-bi-search/></strong></button>
                     </div>
-                </form>
+                </x-form>
             </div>
         </div>
     </div>
+    {{ Breadcrumbs::render('solution', $sol) }}
     <div class="container">
         @foreach ($solutions as $solu)
             <div class="row">
@@ -31,9 +33,10 @@
                     <div id="badges">
                         <div class="container">
                             <h4>
-                                <a href="{{ route('fcat', ['name'=>$solu->category]) }}"><span class="badge badge-primary badge-pill">{{ $solu->category }}</span></a>
-                                <a href=""><span class="badge badge-primary badge-pill">{{ $solu->subcategory }}</span></a>
-                                <a href=""><span class="badge badge-primary badge-pill">{{ $solu->platform }}</span></a>
+                                <a href="{{ route('fcat', ['name'=>$solu->categorie->name]) }}"><span class="badge badge-primary badge-pill">{{ $solu->categorie->name }}</span></a>
+                                <a href="{{ route('fsubcat', ['name'=>$solu->subcategorie->name]) }}"><span class="badge badge-primary badge-pill">{{ $solu->subcategorie->name }}</span></a>
+                                <a href=""><span class="badge badge-primary badge-pill">{{ $solu->platform->name }}</span></a>
+                                <a href=""><span class="badge badge-primary badge-pill">{{ $solu->os->name }}</span></a>
                             </h4>
                         </div>
                     </div>
@@ -41,7 +44,7 @@
                         <div class="container">
                             @foreach ($users as $user)
                                     <span class="navbar-brand">
-                                        {{ __('Par ') }} {{$user->name}}
+                                        {{ __('Par ') }} {{$user->name}} {{ __('du') }} {{$user->country->name}}
                                     </span>
                                     <div class="">
                                         <div class="row">

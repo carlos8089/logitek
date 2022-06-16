@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePlatformRequest;
+use App\Http\Requests\UpdatePlatformRequest;
 use App\Platform;
-use Illuminate\Http\Request;
 
 class PlatformController extends Controller
 {
@@ -33,10 +34,10 @@ class PlatformController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StorePlatformRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePlatformRequest $request)
     {
         $plat = new Platform();
         $plat->name = $request->name;
@@ -70,11 +71,11 @@ class PlatformController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdatePlatformRequest  $request
      * @param  \App\Platform  $platform
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Platform $platform)
+    public function update(UpdatePlatformRequest $request, Platform $platform)
     {
         //
     }

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Country;
-use App\User;
-use App\Http\Requests\StoreCountryRequest;
-use App\Http\Requests\UpdateCountryRequest;
+use Illuminate\Http\Request;
+use App\Country, App\User;
 
 class CountryController extends Controller
 {
@@ -40,21 +38,25 @@ class CountryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCountryRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCountryRequest $request)
+    public function store(Request $request)
     {
-        //
+        $country = new Country();
+        $country->name = $request->name;
+        $country->indicatif = $request->indicatif;
+        $country->save();
+        return redirect()->route('countries.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Country  $country
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Country $country)
+    public function show($id)
     {
         //
     }
@@ -62,10 +64,10 @@ class CountryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Country  $country
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Country $country)
+    public function edit($id)
     {
         //
     }
@@ -73,11 +75,11 @@ class CountryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCountryRequest  $request
-     * @param  \App\Country  $country
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCountryRequest $request, Country $country)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -85,10 +87,10 @@ class CountryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Country  $country
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Country $country)
+    public function destroy($id)
     {
         //
     }

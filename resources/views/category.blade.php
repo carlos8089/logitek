@@ -27,7 +27,7 @@
             @if ($subs->count()!==0)
                 @foreach ($subs as $sub)
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('fsubcat', ['name'=> $sub->name]) }}" role="button">{{$sub->name}} lo</a>
+                    <a class="nav-link" href="{{ route('fsubcat', ['name'=> $sub->name]) }}" role="button">{{$sub->name}}</a>
                 </li>
                 @endforeach
             @else
@@ -76,9 +76,9 @@
                         </div>
                     </div>
                     <div>
-                        <span class="badge badge-primary badge-pill">{{ $fsol->category }}</span>
-                        <span class="badge badge-primary badge-pill">{{ $fsol->subcategory }}</span>
-                        <span class="badge badge-primary badge-pill">{{ $fsol->platform }}</span>
+                        <span class="badge badge-primary badge-pill">{{ $fsol->categorie->name }}</span>
+                        <span class="badge badge-primary badge-pill">{{ $fsol->subcategorie->name }}</span>
+                        <span class="badge badge-primary badge-pill">{{ $fsol->platform->name }}</span>
                     </div>
                 </div>
             @endforeach

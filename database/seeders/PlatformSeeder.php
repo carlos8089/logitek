@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Platform;
+use Illuminate\Support\Facades\DB;
 
 class PlatformSeeder extends Seeder
 {
@@ -14,6 +15,17 @@ class PlatformSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Platform::class, 5)->create();
+        DB::table('platforms')->insert([
+            'name' => 'Web'
+        ]);
+        DB::table('platforms')->insert([
+            'name' => 'Mobile'
+        ]);
+        DB::table('platforms')->insert([
+            'name' => 'Desktop'
+        ]);
+        DB::table('platforms')->insert([
+            'name' => 'Server'
+        ]);
     }
 }

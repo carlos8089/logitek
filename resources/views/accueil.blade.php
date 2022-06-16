@@ -50,29 +50,6 @@
             <hr>
             <span style="margin-right: 5%">+20 categories</span>
             <span style="margin-right: 5%">+10K softwares</span>
-            <div id="search-zone" class="d-flex justify-content-center col-md-8 float-right">
-                <x-form class="form-row" action="{{ url('/search') }}" method="get" style="width: 100%">
-                    <div class="col-10">
-                        <div class="input-group"  style="width: 100%">
-                            <div class="input-group-prepend">
-                                <select class="form-control" name="searchIn" id="searchIn" placeholder="Search In">
-                                    <option value="" selected>{{ __('Search In') }}</option>
-                                    <option value="solution">
-                                        <span>{{ __('Solutions') }}</span>
-                                    </option>
-                                    <option value="publisher">
-                                        <span>{{ __('Publishers') }}</span>
-                                    </option>
-                                </select>
-                            </div>
-                            <input type="search" class="form-control mr-sm-4" placeholder="Search for an App or a User" aria-label="Search" name="stsearch" id="">
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <button class="form-control btn btn-success my-2 my-sm-0" type="submit" style="width: 100%; height:100%"><strong><x-bi-search/></strong></button>
-                    </div>
-                </x-form>
-            </div>
         </div>
     </section>
     <section id="explore-marketplace">

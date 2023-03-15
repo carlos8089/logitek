@@ -61,7 +61,7 @@ Route::resource('comments', CommentController::class);
 Route::get('/','StaticController@accueil')->name('home');
 Route::get('/directory', [StaticController::class, 'marketplaceIndex'])->name('marketplace');
 Route::get('/directory/filter',[StaticController::class, 'filter'])->name('filter');
-Route::get($request->fullUrl()+'/adfilter',[StaticController::class, 'advancedfilter'])->name('advancedfilter');
+//Route::get($request->fullUrl()+'/adfilter',[StaticController::class, 'advancedfilter'])->name('advancedfilter');
 Route::get('/directory/search', [StaticController::class, 'search'])->name('staticsearch');
 Route::get('/directory/{sol}', [StaticController::class,'solution'])->name('staticsolution');
 Route::get('/directory/publisher/{user}', [StaticController::class, 'user'])->name('showpublisher');
